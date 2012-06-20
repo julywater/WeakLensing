@@ -1,0 +1,44 @@
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\DeclareRobustCommand{\greektext}{%
+  \fontencoding{LGR}\selectfont\def\encodingdefault{LGR}}
+\DeclareRobustCommand{\textgreek}[1]{\leavevmode{\greektext #1}}
+\DeclareFontEncoding{LGR}{}{}
+\DeclareTextSymbol{\~}{LGR}{126}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\part*{Likeilyhood Function:}
+
+Definition of likeilyhood function :
+
+Let X be a random variable with a continuous probability distribution
+with density function f depending on a parameter \textgreek{j}. Then
+the function $L(\theta|x)=f_{\theta}(x)$ as a function of $\theta$is
+the likeilyhood function of $\theta$,given the outcome x of X.
+
+In a world ,the likelihood function of a set of parameter values given
+some observed outcomes is equal to the probability of those observed
+outcomes given those parameter values.
+
+In the weak lensing case. We need to get the likeilyhood function
+of shear $\gamma$,given a set of observed lensed ellipticity \{$\epsilon$\},and
+we also know the distribution function of $|\epsilon_{s}$|,ellipticity
+in absence of lensing P($|\epsilon_{s}|)$ .
+
+Thus,the likeilyhood function of $\gamma$ should be $L(\gamma|\{\epsilon\})$=$\underset{i}{\prod}P($$|\epsilon_{s-n}|$).
+Where $\epsilon_{s-n}=\epsilon_{-n}-\gamma$.
+
+Or we can use the Log likeilyhood function $Log(L(\gamma|\{\epsilon\}))=\underset{i}{\sum}Log(P(|\epsilon_{s}|))$.
+\end{document}
