@@ -1,0 +1,48 @@
+%% LyX 2.0.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\begin{document}
+
+\section*{Singularity in Likelihood}
+
+The formula for weak lensing I used is
+\begin{equation}
+\epsilon=\frac{\epsilon_{0}+g}{1+g^{*}\epsilon_{0}}
+\end{equation}
+
+
+Here in weak lensing $|g|<1$.
+
+To recover $\epsilon_{0}$ from $\epsilon$ use:
+\begin{equation}
+\epsilon_{0}=\frac{\epsilon-g}{1-g^{*}\epsilon}
+\end{equation}
+
+
+If we know g we know the transform rule between $\epsilon$and $\epsilon_{0}$.
+
+Set the probability distribution of $\epsilon_{0}$ is $f(\epsilon_{0})$.Then
+the probability distribution of $\epsilon$ is
+\begin{equation}
+p(\epsilon|g)=f(\epsilon_{0}(\epsilon,g))*|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon|,\phi)}|
+\end{equation}
+
+
+The Jacobi term will cause singularity at $|\epsilon_{0}|=0$,because:
+\begin{equation}
+|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon|,\phi)}|=|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(x_{0},y_{0})}*\frac{\partial(x_{0},y_{0})}{\partial(x,y)}*\frac{\partial(x,y)}{\partial(|\epsilon|,\phi)}|=\frac{|\epsilon|}{|\epsilon_{0}|}*|\frac{\partial(x_{0},y_{0})}{\partial(x,y)}|
+\end{equation}
+
+
+When $|\epsilon_{0}|\longmapsto0$ ,$\epsilon\approx\epsilon_{0}+g$.Therefore,$|\frac{\partial(x_{0},y_{0)}}{\partial(x,y)}|\mapsto1$.
+
+When using beta distribution model,$f(\epsilon_{0})=|\epsilon_{0}|^{\alpha-1}(1-|\epsilon_{0}|)^{\beta-1}$
+
+Therefore,$p(\epsilon|g)=|\epsilon_{0}|^{\alpha-2}(1-|\epsilon_{0}|)^{\beta-1}*|\epsilon|*|\frac{\partial(x_{0},y_{0})}{\partial(x,y)}|$
+
+If $\alpha<2$, $p(\epsilon|g)$ has a singular point at $\epsilon_{0}=0$.That
+is,Likelihood function $L(g|\epsilon)$ has a singular point at $g=\epsilon$.
+\end{document}
