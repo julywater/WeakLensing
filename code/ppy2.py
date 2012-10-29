@@ -13,14 +13,15 @@ def shear(e0,g):
 def reshear(e,g):
 	return (e-g)/(1-g.conjugate()*e)
 def jacobian(e,e0,g):
-	delt=0.000001
-	x=e0.real
-	y=e0.imag
-	J1=(reshear(e+delt,g).real-x)/delt
-	J2=(reshear(e+delt*1J,g).imag-y)/delt
-	J3=(reshear(e+delt*1J,g).real-x)/delt
-	J4=(reshear(e+delt,g).imag-y)/delt
-	return abs(J1*J2-J3*J4)
+	abs(1+4*(e.real*g.real+e.imag*g.imag))
+#	delt=0.000001
+#	x=e0.real
+#	y=e0.imag
+#	J1=(reshear(e+delt,g).real-x)/delt
+#	J2=(reshear(e+delt*1J,g).imag-y)/delt
+#	J3=(reshear(e+delt*1J,g).real-x)/delt
+#	J4=(reshear(e+delt,g).imag-y)/delt
+#	return abs(J1*J2-J3*J4)
 def alogam(x):
 	if x<=0:
 		return 0
@@ -38,11 +39,11 @@ def alogam(x):
 	z=1.0/y/y
 	value=f+(y-0.5)*math.log(y)-y+0.918938533204673+(((-0.000595238095238*z+0.000793650793651)*z-0.002777777777778)*z+0.083333333333333)/y
 	return value
-def Beta(p,q):
+def lnBeta(p,q):
 	if p<=0 or q<=0:
 		return 0
 	value=alogam(p)+alogam(q)-alogam(p+q)
-	return math.exp(value)
+	return value
 def fep(x,alpha,beta):
 	if x<0 or x>1:
 		return 0
@@ -54,37 +55,31 @@ def initial():
 	a[2*NP]=2.8+2.0*(1-2*random.random())/10
 	a[2*NP+1]=2.8+2.0*(1-2*random.random())/10
 	return a
-def prior(gamma):
-	return math.exp(-(pow(gamma.real,2)+pow(gamma.imag,2))/2/pow(sig,2))
-def likelihood(e,p,q,B,gamma):
+def lnprior(gamma,p,q):
+	return -(gamma.real*gamma.real+gamma.imag*gamma.imag)/2/(sig*sig)-p-q
+def lnlikelihood(e,p,q,lnB,gamma):
 	e0=reshear(e,gamma)
-	return fep(abs(e0),p,q)/B/abs(e0)*jacobian(e,e0,gamma)
-	#return prior(gamma)*math.exp(-p-q)
-def loglikefunc(X,E):
-	              
+	value=fep(abs(e0),p,q)/abs(e0)*jacobian(e,e0,gamma)
+	if value<=0:
+		return -np.inf
+	return math.log(value)-lnB
+def lnprob(X,E):
 	p=X[2*NP]
 	q=X[2*NP+1]
 	if p<2 or q <2:
 		return -np.inf
-	B=Beta(p,q)
+	lnB=lnBeta(p,q)
 	gamma=[]
-	totlike=1.0
-	loglike=0.0
+	value=0.0
 	for i in range(0,NP):
 		g=complex(X[2*i],X[2*i+1])
-		gamma.append(g)
-#	for i in range(0,NP):
-#		loglike=loglike+math.log(prior(gamma[i]))
-#	totlike=totlike*math.exp(-p-q)
-#	loglike=loglike-p-q
-	for i in range(0,NP):
-		totlike=1.0
-		for j in range(0,N):
-			totlike=totlike*likelihood(E[i][j],p,q,B,gamma[i])
-		if totlike==0.0:
+		if abs(g)>=1:
 			return -np.inf
-		loglike=loglike+math.log(totlike)+math.log(prior(gamma[i]))
-	loglike=loglike-q-p
+		gamma.append(g)
+	for i in range(0,NP):
+		for j in range(0,N):
+			value+=lnlikelihood(E[i][j],p,q,lnB,gamma[i])
+		value=value+lnprior(gamma[i],p,q)
 	return loglike
 phi=[]
 epsilon=[]
@@ -122,21 +117,10 @@ f.close()
 ndim,nwalks=130,500
 X0=[initial() for i in range(nwalks)]
 
-sampler = emcee.EnsembleSampler(nwalks, ndim, loglikefunc, args=[E],threads=12)
+sampler = emcee.EnsembleSampler(nwalks, ndim, lnprob, args=[E],threads=12)
 pos, prob, state = sampler.run_mcmc(X0, 2000)
 sampler.reset()
-for i in range(14):
-	pos, prob, state = sampler.run_mcmc(pos, 2000)
-	sampler.reset()
-f = file("chain_3wan.dat", "w")
-f.close()
-for result in sampler.sample(pos, iterations=100, storechain=False):	
-    position = result[0]	
-    f = open("chain.dat", "a")
-    for k in range(position.shape[0]):
-        f.write("{0:4d} {1:s}\n".format(k, " ".join([str(p) for p in position[k]])))	
-    f.close()
-for i in range(15):
+for i in range(9):
 	pos, prob, state = sampler.run_mcmc(pos, 2000)
 	sampler.reset()
 f = file("chain.dat", "w")
