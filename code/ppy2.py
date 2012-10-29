@@ -70,7 +70,7 @@ def lnprob(X,E):
 		return -np.inf
 	lnB=lnBeta(p,q)
 	gamma=[]
-	value=0.0
+	value=lnprior(gamma[i],p,q)
 	for i in range(0,NP):
 		g=complex(X[2*i],X[2*i+1])
 		if abs(g)>=1:
@@ -79,8 +79,7 @@ def lnprob(X,E):
 	for i in range(0,NP):
 		for j in range(0,N):
 			value+=lnlikelihood(E[i][j],p,q,lnB,gamma[i])
-		value=value+lnprior(gamma[i],p,q)
-	return loglike
+	return value
 phi=[]
 epsilon=[]
 random.seed(98)
