@@ -13,7 +13,7 @@ def shear(e0,g):
 def reshear(e,g):
 	return (e-g)/(1-g.conjugate()*e)
 def jacobian(e,e0,g):
-	abs(1+4*(e.real*g.real+e.imag*g.imag))
+	return(abs(1+4*(e.real*g.real+e.imag*g.imag)))
 #	delt=0.000001
 #	x=e0.real
 #	y=e0.imag
