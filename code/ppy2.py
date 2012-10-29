@@ -70,12 +70,13 @@ def lnprob(X,E):
 		return -np.inf
 	lnB=lnBeta(p,q)
 	gamma=[]
-	value=lnprior(gamma[i],p,q)
+	
 	for i in range(0,NP):
 		g=complex(X[2*i],X[2*i+1])
 		if abs(g)>=1:
 			return -np.inf
 		gamma.append(g)
+	value=lnprior(gamma[i],p,q)	
 	for i in range(0,NP):
 		for j in range(0,N):
 			value+=lnlikelihood(E[i][j],p,q,lnB,gamma[i])
