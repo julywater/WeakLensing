@@ -13,7 +13,7 @@ def shear(e0,g):
 def reshear(e,g):
 	return (e-g)/(1-g.conjugate()*e)
 def jacobian(e,e0,g):
-	abs(1+4*(e.real*g.real+e.imag*g.imag))
+	return(abs(1+4*(e.real*g.real+e.imag*g.imag)))
 #	delt=0.000001
 #	x=e0.real
 #	y=e0.imag
@@ -70,17 +70,17 @@ def lnprob(X,E):
 		return -np.inf
 	lnB=lnBeta(p,q)
 	gamma=[]
-	value=0.0
+	
 	for i in range(0,NP):
 		g=complex(X[2*i],X[2*i+1])
 		if abs(g)>=1:
 			return -np.inf
 		gamma.append(g)
+	value=lnprior(gamma[i],p,q)	
 	for i in range(0,NP):
 		for j in range(0,N):
 			value+=lnlikelihood(E[i][j],p,q,lnB,gamma[i])
-		value=value+lnprior(gamma[i],p,q)
-	return loglike
+	return value
 phi=[]
 epsilon=[]
 random.seed(98)
