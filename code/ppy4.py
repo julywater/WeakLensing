@@ -37,7 +37,7 @@ def lnfepfit(x,P):
 	for i in range(N*NP):
 		if x[i]>=1 or x[i]<0:
 			return -np.inf
-		num[i]=(int)(x[i]/0.02)
+		num[i]=(int)(x[i]/0.05)
 	return np.array([P[num[i]] for i in range(N*NP)])
 def initial(average,hist):
 	a=[0 for i in range(2*NP+Nbin)]
