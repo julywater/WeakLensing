@@ -37,7 +37,7 @@ def lnfepfit(x,P):
 	for i in range(N*NP):
 		if x[i]>=1 or x[i]<0:
 			return np.array([-np.inf for i in range(N*NP)])
-		i=np.floor(x/0.05).astype(int)
+		i=np.floor(x/(1.0/Nbin)).astype(int)
 	return P[i]
 def initial(average,hist):
 	a=[0 for i in range(2*NP+Nbin)]
@@ -69,7 +69,7 @@ def loglikefunc(X,E):
 	P=[0 for i in range(Nbin)]
 	temp=0.0
 	for i in range(0,Nbin):
-		temp+=math.exp(X[2*NP+i])*(0.05*i+0.025)
+		temp+=math.exp(X[2*NP+i])*(1.0/Nbin*i+1.0/2/Nbin)
 	for i in range(0,Nbin):
 		P[i]=X[2*NP+i]-math.log(temp)
 #	value=lnprior(P)	
