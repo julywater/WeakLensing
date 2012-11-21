@@ -74,7 +74,7 @@ def loglikefunc(X,E):
 		P[i]=X[2*NP+i]-math.log(temp)
 #	value=lnprior(P)	
 	value=lnlikelihood(E,P,gamma)
-	return sum(value)-lnprior(P)
+	return sum(value)+lnprior(P)
 phi=[]
 epsilon=[]
 random.seed(87)
