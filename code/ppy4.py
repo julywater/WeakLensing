@@ -16,10 +16,13 @@ Nbin=20
 ndim=2*NP+Nbin
 nwalks=400
 def shear(e0,g):
+#the function that produce sheared ellipticity
 	return (e0+g)/(1+g.conjugate()*e0)
 def reshear(e,g):
+#the function that recovers unlensed ellipticity
 	return (e-g)/(1-g.conjugate()*e)
 def jacobian(e,e0,g):
+#calculate the jacobean det which is part of the likelihood function
 	delt=0.000001
 	x=e0.real
 	y=e0.imag
@@ -34,12 +37,14 @@ def fep(x,alpha,beta):
 		return 0
 	return pow(x,alpha-1)*pow(1-x,beta-1)
 def lnfepfit(x,P):
+#the step function of P(|epsilon|)
 	for i in range(N*NP):
 		if x[i]>=1 or x[i]<0:
 			return np.array([-np.inf for i in range(N*NP)])
 		i=np.floor(x/(1.0/Nbin)).astype(int)
 	return P[i]
 def initial(average,hist):
+#initialize the emcee walkers around the output of simple average and histogram of true P(e)
 	a=[0 for i in range(2*NP+Nbin)]
 	for i in range(0,2*NP):
 		a[i]=average[i]+random.gauss(0.0,sig)
@@ -47,34 +52,37 @@ def initial(average,hist):
 		a[2*NP+i]=hist[i]+random.gauss(0.0,0.3)
 	return a
 #def lnprior(gamma):
+#returns the ln prior probability density of gamma
 #	return -(pow(gamma.real,2)+pow(gamma.imag,2))/2/pow(sig,2)
 def lnprior(P):
+#prior of step function parameters,makes the step function smooth
 	summ=0
 	for i in range(1,Nbin):
 		summ+=(P[i]-P[i-1])**2
 	return -2*summ	
 def lnlikelihood(E,P,gamma):
+#returns the numpy array value ,which contains the log_likelihood calculated with each galaxies.
 	e0=reshear(e,gamma)
 	value=lnfepfit(np.abs(e0),P)+np.log(jacobian(e,e0,gamma))
 	return value
 	#return prior(gamma)*math.exp(-p-q)
-def loglikefunc(X,E):
+def postfunc(X,E):
 	gamma=np.array([1J+1 for i in range(NP*N)])
 	for i in range(0,NP):
 		g=complex(X[2*i],X[2*i+1])
 		if abs(g)>1:
 			return -np.inf
-		for j in range(N):
-			gamma[i*N+j]=g
-	P=[0 for i in range(Nbin)]
-	temp=0.0
-	for i in range(0,Nbin):
-		temp+=math.exp(X[2*NP+i])*(1.0/Nbin*i+1.0/2/Nbin)
-	for i in range(0,Nbin):
-		P[i]=X[2*NP+i]-math.log(temp)
+		gamma[i*N:(i+1)*N]=g
+	P=np.zeros(Nbin)
+	P=X[2*NP:2*NP+Nbin]
+        t=np.array([1.0/Nbin*i+0.5/Nbin for i in range(Nbin)])
+	temp=np.sum(np.exp(P)*t)
+        P=P-math.log(temp)
+#load gamma and stepfunction parameters P to np arrays
 #	value=lnprior(P)	
 	value=lnlikelihood(E,P,gamma)
 	return sum(value)+lnprior(P)
+#add likelihood and  prior together
 phi=[]
 epsilon=[]
 random.seed(87)
@@ -124,7 +132,7 @@ for i in range(NP):
 
 X0=[initial(average,hist) for i in range(nwalks)]
 
-sampler = emcee.EnsembleSampler(nwalks, ndim, loglikefunc, args=[E],threads=1)
+sampler = emcee.EnsembleSampler(nwalks, ndim, postfunc, args=[E],threads=1)
 pos, prob, state = sampler.run_mcmc(X0, 2)
 sampler.reset()
 print('done')
