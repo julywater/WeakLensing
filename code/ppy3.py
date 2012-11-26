@@ -25,28 +25,6 @@ def jacobian(e,e0,g):
 	J3=(reshear(e+delt*1J,g).real-x)/delt
 	J4=(reshear(e+delt,g).imag-y)/delt
 	return abs(J1*J2-J3*J4)
-def alogam(x):
-	if x<=0:
-		return 0
-	y=x
-	if x<7:
-		f=1.0
-		z=y
-		while z<7 :
-			f=f*z
-			z=z+1.0
-		y=z
-		f=-math.log(f)
-	else:
-		f=0.0
-	z=1.0/y/y
-	value=f+(y-0.5)*math.log(y)-y+0.918938533204673+(((-0.000595238095238*z+0.000793650793651)*z-0.002777777777778)*z+0.083333333333333)/y
-	return value
-def Beta(p,q):
-	if p<=0 or q<=0:
-		return 0
-	value=alogam(p)+alogam(q)-alogam(p+q)
-	return math.exp(value)
 def fep(x,alpha,beta):
 	if x<0 or x>1:
 		return 0
@@ -59,7 +37,7 @@ def lnfepfit(x,P):
 def initial(average,hist):
 	a=[0 for i in range(2*NP+Nbin)]
 	for i in range(0,2*NP):
-		a[i]=random.gauss(0.0,0.05)
+		a[i]=average[i]+random.gauss(0.0,0.05)
 	for i in range(Nbin):
 		a[2*NP+i]=hist[i]+random.gauss(0.0,0.3)
 	return a
