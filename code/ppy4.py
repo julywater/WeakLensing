@@ -118,8 +118,8 @@ for i in range(Nbin):
 average=np.array([0.0for i in range(2*NP)])
 for i in range(NP):
 	for j in range(N):
-		average[2*i]+=E[i][j].real
-		average[2*i+1]+=E[i][j].imag			
+		average[2*i]+=E[i*N+j].real
+		average[2*i+1]+=E[i*N+j].imag			
 average=average/N
 		
 
