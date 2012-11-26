@@ -36,12 +36,14 @@ def fep(x,alpha,beta):
 		return 0
 	return pow(x,alpha-1)*pow(1-x,beta-1)
 def lnfepfit(x,P):
-	for i in range(N):
+	for i in range(N*NP):
 		if x[i]>=1 or x[i]<0:
-			return np.array([-np.inf for i in range(N)])
-		i=np.floor(x/0.05).astype(int)
+			return np.array([-np.inf for i in range(N*NP)])
+		i=np.floor(x/(1.0/Nbin)).astype(int)
 	return P[i]
+	#step function model P(|e|)
 def initial(average,hist):
+	#initial emceewalkers
 	a=[0 for i in range(2*NP+Nbin)]
 	for i in range(0,2*NP):
 		a[i]=average[i]+random.gauss(0.0,0.05)
@@ -59,8 +61,10 @@ def lnlikelihood(e,gamma,P):
 	e0=reshear(e,gamma)
 	value=lnfepfit(np.abs(e0),P)+np.log(jacobian(e,e0,gamma))
 	return value
-	#return prior(gamma)*math.exp(-p-q)
+	#return the array of likelihood for each galaxy data
+	
 def postfunc(X,E):
+	#return posterior probability
 	gamma = X[0:2*NP:2] + 1j * X[1:2*NP:2]
 	
 	P=np.zeros(Nbin)
@@ -71,6 +75,7 @@ def postfunc(X,E):
 #	like_array = np.frompyfunc(lnlikelihood,3,1)
 	value=lnlikelihood(E,gamma[index],P)
 	return np.sum(value)+lnprior(P)
+	#add prior and likelihood becomes posterior
 phi=[]
 epsilon=[]
 random.seed(87)
