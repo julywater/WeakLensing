@@ -39,7 +39,7 @@ def lnfepfit(x,P):
 	for i in range(N*NP):
 		if x[i]>=1 or x[i]<0:
 			return np.array([-np.inf for i in range(N*NP)])
-		i=np.floor(x/(1.0/Nbin)).astype(int)
+	i=np.floor(x/(1.0/Nbin)).astype(int)
 	return P[i]
 	#step function model P(|e|)
 def initial(average,hist):
