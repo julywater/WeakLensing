@@ -1,0 +1,98 @@
+%% LyX 2.0.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{textcomp}
+\usepackage{babel}
+\begin{document}
+
+\part*{Introduction}
+
+
+\section{Bias}
+
+This bias on the shear is usually quantifi{}ed in terms of multiplicative
+and additive errors This bias on the shear is usually quantifi{}ed
+in terms of multiplicative and additive errors $m_{i}$ and $c_{i}$.
+\begin{equation}
+\hat{\gamma_{i}}=(1+m_{i})\gamma_{i}^{t}+c_{i}
+\end{equation}
+
+
+The requirements on the level of systematic errors for current and
+future galaxy surveys are expressed in terms of mi, ci in Amara \&
+R\textasciiacute{}efr\textasciiacute{}egier (2008).
+
+For the simple average method,the systematic error of a shear measurement
+method can be tested on a fi{}nite number of images in the absence
+of shape noise by performing a \textquoteleft{}ring-test\textquoteright{}
+(Nakajima \& Bernstein 2007).
+
+For the traditional average method the bias of sear measurement comes
+from the convolution with the PSF,pixelisation of the image , pixel
+noise on the image due to the fi{}nite number of photons from the
+source and atmosphere,and all the other effects that may cause error
+in the galaxy ellipticity measurement.
+
+(Tomasz Kacprzak\&Joe Zuntz 2012) present a method to effectively
+remove this noise bias for realistic galaxy images. Using a forward
+model fi{}tting, Maximum Likelihood approach for parameter estimation.
+They create a model of the bias as a function of galaxy and PSF parameters
+by determining their bias from various simulations that sample parameter
+space. They demonstrate that this procedure successfully removes the
+noise bias to the accuracy required by upcoming galaxy surveys.
+
+
+\section{P(e) Intrinsic ellipticity distribution}
+
+A number of studies have been made of the distribution of galaxy ellipticities
+(e.g. ). These studies find a wide variation in distribution of |e|
+, which appears strongly dependent on apparent magnitude.
+
+(Leauthaud\&Massey 2007) undertake a measurement of the intrinsic
+shape noise, $\sigma_{int}$, as a function of magnitude, size and
+redshift,by derive an empirical estimation of the shape measurement
+error, $\sigma_{measure}$.Then subtract it from $\sigma_{\gamma}^{2}$.
+(The uncertanty of shear measurement in simple average is$\sigma_{\gamma}^{2}=\sigma_{int}^{2}+\sigma_{measure}^{2}$)
+
+(http://arxiv.org/pdf/astro-ph/0702359v1.pdf) 
+
+(Joachimi\&Semboloni2012) study both the polarisation dispersion and
+distribution of galaxy ellipticity using COSMOS data.
+
+Their results shows a clear tendency towards lower $\sigma_{e}$ for
+luminous galaxies with MV< \textminus{}22 in a broad redshift range
+0.5 < z < 1.8.
+
+They also plot P(|e|) for the full LRG sample and non-LRG galaxies
+in the magnitude range \textminus{}19 < MV < \textminus{}17 ,based
+on both COSMOS data and results from the simulation-based models.
+
+
+\section{lensfit}
+
+(Miller\& T. D. Kitchicung2007 ) proposed a modelfitting approach
+in the galaxy shape measurement and evaluated how shear sensitivity
+should be calculae based on posterior distribution of galaxies shape.
+
+(Gamma estimaion:$\hat{g}=\frac{\sum w_{i}<e>_{i}}{\sum\partial<e>_{i}/\partial g}$
+when the shape measurement is perfect thismeasurement goes back to
+simple average)
+
+It convolves the galaxy models with the PSF to calculate the posterior
+probability of the model given the data then marginalize over galaxy
+size, centroid and bulge fraction.The shear is then estimated in a
+Bayesian way from this posterior probability surface.
+
+To calculate the ellipticity prior which isrequired by the lensfit
+method,(Miller\&T. D. Kitching2008) proposed an iterative mehod .(In
+their model P(|e|) depends on 3 parameters and has a form cos{*}exp).They
+proposed a model forP(|e|) and iteratively adjust three parameters
+until the summed posterior and prior distributions agree.(? It looks
+like they do not cares about the shear while calculating the ellipticity
+posterior,then they use it in the shear estimator.?) 
+
+CFHTLenS is the fi{}rst weak lensing survey to apply the lensfi{}t
+model fi{}tting method. 
+\end{document}
