@@ -124,12 +124,12 @@ f.close()
 hist,num=np.histogram(epsilon,bins=Nbin,range=(0,1),normed=True)
 for i in range(Nbin):
 	hist[i]=hist[i]/Nbin
-average=[0.0for i in range(2*NP)]
+average=np.array([0.0for i in range(2*NP)])
 for i in range(NP):
 	for j in range(N):
 		average[2*i]+=E[i*N+j].real
-		average[2*i+1]=E[i*N+j].imag			
-
+		average[2*i+1]+=E[i*N+j].imag			
+average=average/N
 X0=[initial(average,hist) for i in range(nwalks)]
 
 sampler = emcee.EnsembleSampler(nwalks, ndim, postfunc, args=[E],threads=1)
