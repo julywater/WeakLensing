@@ -54,7 +54,7 @@ def lnlikelihood(e,P,gamma):
 
 	return value
 	#return prior(gamma)*math.exp(-p-q)
-def loglikefunc(X,E):
+def postfunc(X,E):
 	gamma=[]
 	
 	for i in range(0,NP):
@@ -128,7 +128,7 @@ average=average/N
 X0=[initial(average,hist) for i in range(nwalks)]
 
 
-sampler = emcee.EnsembleSampler(nwalks, ndim, loglikefunc, args=[E],threads=1)
+sampler = emcee.EnsembleSampler(nwalks, ndim, postfunc, args=[E],threads=1)
 pos, prob, state = sampler.run_mcmc(X0, 2)
 sampler.reset()
 print('done')
