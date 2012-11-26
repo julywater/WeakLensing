@@ -44,7 +44,7 @@ def lnfepfit(x,P):
 def initial(average,hist):
 	a=[0 for i in range(2*NP+Nbin)]
 	for i in range(0,2*NP):
-		a[i]=random.gauss(0.0,0.05)
+		a[i]=average[i]+random.gauss(0.0,0.05)
 	for i in range(Nbin):
 		a[2*NP+i]=hist[i]+random.gauss(0.0,0.3)
 	return a
@@ -62,13 +62,14 @@ def lnlikelihood(e,gamma,P):
 	#return prior(gamma)*math.exp(-p-q)
 def postfunc(X,E):
 	gamma = X[0:2*NP:2] + 1j * X[1:2*NP:2]
+	
 	P=np.zeros(Nbin)
 	P=X[2*NP:2*NP+Nbin]
         t=np.array([1.0/Nbin*i+0.5/Nbin for i in range(Nbin)])
 	temp=np.sum(np.exp(P)*t)
         P=P-math.log(temp)
-	like_array = np.frompyfunc(lnlikelihood,3,1)
-	value=like_array(E,gamma[index],P)
+#	like_array = np.frompyfunc(lnlikelihood,3,1)
+	value=lnlikelihood(E,gamma[index],P)
 	return np.sum(value)+lnprior(P)
 phi=[]
 epsilon=[]
