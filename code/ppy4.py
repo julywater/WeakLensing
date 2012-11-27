@@ -16,7 +16,7 @@ Nbin=20
 ndim=2*NP+Nbin
 nwalks=400
 index=np.array([i for i in range(N) for j in range(NP)])
-
+t = (np.arange(Nbin)+0.5) / float(Nbin)
 def shear(e0,g):
 	return (e0+g)/(1+g.conjugate()*e0)
 def reshear(e,g):
@@ -67,9 +67,9 @@ def postfunc(X,E):
 	#return posterior probability
 	gamma = X[0:2*NP:2] + 1j * X[1:2*NP:2]
 	
-	P=np.zeros(Nbin)
+#	P=np.zeros(Nbin)
 	P=X[2*NP:2*NP+Nbin]
-        t=np.array([1.0/Nbin*i+0.5/Nbin for i in range(Nbin)])
+        
 	temp=np.sum(np.exp(P)*t)
         P=P-math.log(temp)
 #	like_array = np.frompyfunc(lnlikelihood,3,1)
