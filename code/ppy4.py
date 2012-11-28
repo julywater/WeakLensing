@@ -51,12 +51,9 @@ def initial(average,hist):
 		a[2*NP+i]=hist[i]+random.gauss(0.0,0.3)
 	return a
 #def lnprior(gamma):
-#	return -(pow(gamma.real,2)+pow(gamma.imag,2))/2/pow(sig,2)
+#	return -(pow(gamma.real,2)+pow(gamma.imag,2))/2/pow(sig,2):
 def lnprior(P):
-	summ=0
-	for i in range(1,Nbin):
-		summ+=(P[i]-P[i-1])**2
-	return -2*summ	
+    return np.sum((P[1:] - P[:-1])**2)
 def lnlikelihood(e,gamma,P):
 	e0=reshear(e,gamma)
 	value=lnfepfit(np.abs(e0),P)+np.log(jacobian(e,e0,gamma))
