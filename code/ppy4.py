@@ -17,6 +17,7 @@ ndim=2*NP+Nbin
 nwalks=400
 index=np.array([i for i in range(N) for j in range(NP)])
 t = (np.arange(Nbin)+0.5) / float(Nbin)
+inf=np.array([np.inf for i in range(N*NP)])
 def shear(e0,g):
 	return (e0+g)/(1+g.conjugate()*e0)
 def reshear(e,g):
@@ -36,9 +37,8 @@ def fep(x,alpha,beta):
 		return 0
 	return pow(x,alpha-1)*pow(1-x,beta-1)
 def lnfepfit(x,P):
-	for i in range(N*NP):
-		if x[i]>=1 or x[i]<0:
-			return np.array([-np.inf for i in range(N*NP)])
+	if len(x[x>1])>=1 or len(x[x<0])>=1:
+			return inf
 	i=np.floor(x/(1.0/Nbin)).astype(int)
 	return P[i]
 	#step function model P(|e|)
