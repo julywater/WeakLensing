@@ -53,7 +53,7 @@ def initial(average,hist):
 #def lnprior(gamma):
 #	return -(pow(gamma.real,2)+pow(gamma.imag,2))/2/pow(sig,2):
 def lnprior(P):
-    return np.sum((P[1:] - P[:-1])**2)
+    return -2*np.sum((P[1:] - P[:-1])**2)
 def lnlikelihood(e,gamma,P):
 	e0=reshear(e,gamma)
 	value=lnfepfit(np.abs(e0),P)+np.log(jacobian(e,e0,gamma))
