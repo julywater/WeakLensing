@@ -15,7 +15,7 @@ Nbin=20
 #number of bins
 ndim=2*NP+Nbin
 nwalks=400
-index=np.array([i for i in range(N) for j in range(NP)])
+index=np.array([i for i in range(NP) for j in range(N)])
 t = (np.arange(Nbin)+0.5) / float(Nbin)
 inf=np.array([np.inf for i in range(N*NP)])
 def shear(e0,g):
