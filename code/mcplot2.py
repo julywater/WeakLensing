@@ -7,20 +7,22 @@ g1n=[]
 dg1n=[]
 g2n=[]
 dg2n=[]
+v1=[]
+v2=[]
 Datafile=open("deltag1.txt",'r')
 lines = Datafile.readlines()
 for line in lines:
-	x,y=line.split()
+	x,y,v=line.split()
 	g1n.append(float(x))
 	dg1n.append(float(y))
-
+        v1.append(float(v)**2)
 Datafile=open("deltag2.txt",'r')
 lines = Datafile.readlines()
 for line in lines:
-	x,y=line.split()
+	x,y,v=line.split()
 	g2n.append(float(x))
 	dg2n.append(float(y))
-
+        v2.append(float(v)**2)
 g1n=np.array(g1n)
 dg1n=np.array(dg1n)
 g2n=np.array(g2n)
