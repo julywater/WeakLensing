@@ -42,20 +42,21 @@ def lnfep(x,P):
 	if len(x[x<0])>=1 or len(x[x>=1])>=1:
 		return inf
 	return (P[0]-2)*np.log(x)+(P[1]-1)*np.log(1-x)-math.log(special.beta(P[0],P[1]))
-def initial(average):
-	a=np.zeros(2*NP)
-	for i in range(0,2*NP):
-		a[i]=average[i]
+def initial(average,P):
+	a=np.zeros(2*NP+2)
+	a[:2*NP]=average
+	a[2*NP:]=P
 	return a
 def lnlikelihood(e,gamma,P):
 	e0=reshear(e,gamma)
 	value=lnfep(np.abs(e0),P)+np.log(jacobian(e,e0,gamma))
 	return value
 	#return prior(gamma)*math.exp(-p-q)
-def postfunc(X,P,E):
+def postfunc(X,E):
 	gamma = X[0:2*NP:2] + 1J* X[1:2*NP:2]
 	if len(gamma[np.abs(gamma)>=1])>0:
 		return -np.inf
+	P=X[2*NP:]
 	if P[0]<2 or P[1]<2:
 		return -np.inf
 #beta function model
@@ -83,41 +84,39 @@ E.shape=(NP,N)
 average=np.mean(E,1)
 E.shape=(NP*N)
 #print(average,abs(complex(average[0],average[1])-gamma[0]))
-X0=initial(average) 
-P0=(2.8,2.8)
-prosig=0.16
+P0=np.array((2.8,2.8))
+X0=initial(average,P0) 
+
+prosig=np.zeros(2*NP+2)
+prosig[:2*NP]=0.16
+prosig[2*NP:]=0.1
 Nstep=6000
 Nburnin=1000
 g1=np.zeros(Nstep)
 g2=np.zeros(Nstep)
 Pchain=[]
-fold=postfunc(X0,P0,E)
 
 
 #only works for 1 patch
 #for many patch I want make postfunc returns arrays of ln_prob for each patch while sampling g and retuns total ln_prob while doing shape parameter sampling
-def mhsample(X0,P0,prosig,fold,E,samp):
-	if samp=='g':
-		X1=X0+np.random.gauss(0,prosig,2)
-		fnew =postfunc(X1,P0,E)
+def mhsample(X0,E,prosig,index,nsamples):
+		
+	chain=np.zeros(nsamples,ndim)
+	fold=postfunc(X,E)
+	j=0.0
+	for i in xrange(nsamples):
+		X1[index]=X0[index]+np.random.normal(loc=0.0,prosig[index])
+		fnew =postfunc(X1,E)
         	lnprob=min([0,fnew-fold]) 
 		u=np.log(random.random())
 		if u<lnprob:
-			return(X1,fnew,1)
-		else :
-			return(X0,fold,0)
-	if samp=='shape':
-		P1=P0+np.random.gauss(0,prosig,2)
-		fnew=postfunc(X0,P1,E)
-		lnprob=min([0.,fnew-fold])
-		u=math.log(rangom.random())
-		if u<lnprob:
-			return(P1,fnew,1)
-		else :
-			return(P0,fold,0)
-	else:
-		print('wrong input')
-		return(0,0,-1)
+			X0=X1
+			fold=fnew
+			j+=1
+		chain[i]=X0
+	accept_rate=float(j)/nsamples
+	retrun (chain,accept_rate)
+
 j=0
 for i in xrange(Nstep)
 	X0,fold,j+=mhsample(X0,P0,0.16,fold,E,'g')
