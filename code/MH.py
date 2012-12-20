@@ -62,49 +62,25 @@ def postfunc(X,P,E):
 #       pri=prior(P)
 	value=lnlikelihood(E,gamma[index],P)
 	return np.sum(value)
-phi=[]
-epsilon=[]
 random.seed(67)
-
-for i in range(0,N*NP):
-	phi.append(random.random())
-random.shuffle(phi)
 i=0
 p=2.8
 q=2.8
-while i<N*NP :
-	temp=random.random()
-	if 4*fep(temp,p,q)>random.random():
-		epsilon.append(temp)
-		i=i+1
-random.shuffle(epsilon)
-elipse=[]
-for i in range(0,N*NP):
-	elipse.append(epsilon[i]*cmath.exp(2J*phi[i]*math.pi))
-gamma=[]
-for i in range(0,NP):
-	gamma.append(complex(0.1*(1-2*random.random()),0.1*(1-2*random.gauss(0,sig))))
+phi=np.random.rand(N*NP)
+epsilon=np.random.beta(p,q,size=N*NP)
+elipse=epsilon*np.exp(2J*phi*math.pi)
+gamma=1-2*np.random.rand(N*NP)+1J*(1-2*np.random.rand(N*NP))
+E=shear(elipse,gamma[index])
 f=file("gamma.txt","w")
 for i in range(NP):
 	f.write("%f   %f\n" %(gamma[i].real,gamma[i].imag))
 f.close()
-E=np.array([1J+1 for i in range(NP*N)])
 f=file("sheared.txt","w")
-for i in range(0,NP):
-	for j in range(0,N):
-		E[i*N+j]=shear(elipse[i*N+j],gamma[i])
-		f.write("%f   %f\n" %(E[i*N+j].real,E[i*N+j].imag))
+for i in range(0,N*NP):
+	f.write("%f   %f\n" %(E[i].real,E[i].imag))
 f.close()
-for i in range(0,NP):
-	for j in range(0,N):
-		epsilon[i*N+j]=np.abs(E[i*N+j])
-average=np.array([0.0 for i in range(2*NP)])
-for i in range(NP):
-	for j in range(N):
-		average[2*i]+=E[i*N+j].real
-		average[2*i+1]+=E[i*N+j].imag			
-average=average/N
-
+E.shape=(NP,N)
+average=np.mean(E,1)
 #print(average,abs(complex(average[0],average[1])-gamma[0]))
 X0=initial(average) 
 P0=(2.8,2.8)
