@@ -81,6 +81,7 @@ for i in range(0,N*NP):
 f.close()
 E.shape=(NP,N)
 average=np.mean(E,1)
+E.shape=(NP*N)
 #print(average,abs(complex(average[0],average[1])-gamma[0]))
 X0=initial(average) 
 P0=(2.8,2.8)
