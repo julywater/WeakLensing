@@ -99,7 +99,7 @@ Pchain=[]
 
 #only works for 1 patch
 #for many patch I want make postfunc returns arrays of ln_prob for each patch while sampling g and retuns total ln_prob while doing shape parameter sampling
-def mhsampler_general(X0,E,fold,function,prosig,index)
+def mhsampler(X0,E,fold,function,prosig,index)
 	X1[index]=X0[index]+np.random.normal(loc=0.0,prosig[index])
 	fnew =function(X1,E)
 	lnprob=(few-fold)
@@ -107,7 +107,7 @@ def mhsampler_general(X0,E,fold,function,prosig,index)
 	if u<lnprob:
 		X0=X1
 		fold=fnew
-	return X0	
+	return X0
 def mhsampler_g(X0,E,fold,function,prosig):
 	X1[:2*NP]=X0[:2*NP]+np.random.normal(loc=0.0,prosig[2*NP])
 	fnew =function(X1,E)
@@ -122,8 +122,11 @@ def gibbssampler(X0,E,prosig,nsample):
 	chain=np.zeros((nsample,ndim))
 	for i in xrange(nsample):
 		ind=np.array([2*NP,2*NP+1])
-		X0[ind]=mhsampler_general(X0,E,fold,postfunc,prosig,ind)
-		X0[:2*NP]=mhsampler_g(X0,E,fold,likelihood,prosig)
+		fold=postfunc(X0,E)
+		#for this case postfunc need to return arrays for (nP) patches
+		X0[ind],fold=mhsampler_a(X0,E,fold,postfunc,prosig,ind)
+		#not finished mhsampler_s need to return this array like fold to mhsampler_g to avoid over call of postfunc
+		X0[:2*NP],fold=mhsampler_g(X0,E,fold,postfunc,prosig)
 		chain[i]=X0
 		
 #I can't get rid of the loop using this one below		
@@ -140,7 +143,7 @@ def gibbssampler(X0,E,prosig,nsample):
 #			ind1=np.array((2*j,2*j+1,2*NP,2*NP+1))
 #			ind2=np.array([0,1])
 #			X0[ind]=mhsampler(X0[ind1],e,fold,prosig,ind2)[ind2]
-#np.array version
+#np.array version....not known yet
 #		e=np.zeros((N,NP))
 #		ind=np.zeros((2,NP))
 #		ind1=np.zeros((4,NP))
