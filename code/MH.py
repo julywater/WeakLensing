@@ -99,16 +99,16 @@ Pchain=[]
 
 #only works for 1 patch
 #for many patch I want make postfunc returns arrays of ln_prob for each patch while sampling g and retuns total ln_prob while doing shape parameter sampling
-def mhsample(X0,E,prosig,index,nsamples):
-		
+#fold=postfunc(X,E)
+def mhsampler(X0,E,function,prosig,index,nsamples):
 	chain=np.zeros(nsamples,ndim)
 	fold=postfunc(X,E)
 	j=0.0
 	for i in xrange(nsamples):
 		X1[index]=X0[index]+np.random.normal(loc=0.0,prosig[index])
-		fnew =postfunc(X1,E)
+		fnew =function(X1,E)
         	lnprob=min([0,fnew-fold]) 
-		u=np.log(random.random())
+		u=math.log(random.random())
 		if u<lnprob:
 			X0=X1
 			fold=fnew
@@ -117,22 +117,7 @@ def mhsample(X0,E,prosig,index,nsamples):
 	accept_rate=float(j)/nsamples
 	retrun (chain,accept_rate)
 
-j=0
-for i in xrange(Nstep)
-	X0,fold,j+=mhsample(X0,P0,0.16,fold,E,'g')
-	g1[i]=X0[0]
-	g2[i]=X0[1]
-print('accept rate of g sampling =')
-print(float(j)/Nstep)
-fold=postfunc(X0,P0,E)
-j=0
-for i in xrange(Nstep)
-	P0,fold,j+=mhsample(X0,P0,0.4,fold,E,'shape')
-	Pchain.append(P0)
 
-
-x=np.mean(g1)
-y=np.mean(g2)
 
 
 import matplotlib.pyplot as pl
