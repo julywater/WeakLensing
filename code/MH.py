@@ -99,27 +99,32 @@ Pchain=[]
 
 #only works for 1 patch
 #for many patch I want make postfunc returns arrays of ln_prob for each patch while sampling g and retuns total ln_prob while doing shape parameter sampling
-#fold=postfunc(X,E)
-def mhsampler(X0,E,function,prosig,index,nsamples):
-	chain=np.zeros(nsamples,ndim)
-	fold=postfunc(X,E)
-	j=0.0
+
+def mhsampler(X0,E,fold,prosig,index):
+	X1[index]=X0[index]+np.random.normal(loc=0.0,prosig[index])
+	fnew =postfunc(X1,E)
+        lnprob=min([0,fnew-fold]) 
+	u=math.log(random.random())
+	if u<lnprob:
+		X0=X1
+		fold=fnew
+	retrun X0
+
+def gibbs(X0,E,prosig,nsamples):
+	chain=np.zeros((nsamples,ndim))
 	for i in xrange(nsamples):
-		X1[index]=X0[index]+np.random.normal(loc=0.0,prosig[index])
-		fnew =function(X1,E)
-        	lnprob=min([0,fnew-fold]) 
-		u=math.log(random.random())
-		if u<lnprob:
-			X0=X1
-			fold=fnew
-			j+=1
-		chain[i]=X0
-	accept_rate=float(j)/nsamples
-	retrun (chain,accept_rate)
-
-
-
-
+		ind=np.array((2*NP,2*NP+1))
+		fold=postfunc(X0,E)
+		X0[ind]=mhsampler(X0,E,fold,prosig,ind)[ind]
+		for j in xrange(NP):
+			e=E[j*N:(j+1)*N]
+			ind=np.array((2*j,2*j+1))
+			ind1=np.array((2*j,2*j+1,2*NP,2*NP+1))
+			ind2=np.array([0,1])
+			X0[ind]=mhsampler(X0[ind1],e,fold,prosig,ind2)[ind2]
+		chain[i]=X0	
+	return chain
+	
 import matplotlib.pyplot as pl
 pl.figure()
 pl.xlim((-0.4,0.4))
