@@ -116,12 +116,18 @@ def gibbs(X0,E,prosig,nsamples):
 		ind=np.array((2*NP,2*NP+1))
 		fold=postfunc(X0,E)
 		X0[ind]=mhsampler(X0,E,fold,prosig,ind)[ind]
+#loops version		
 		for j in xrange(NP):
 			e=E[j*N:(j+1)*N]
 			ind=np.array((2*j,2*j+1))
 			ind1=np.array((2*j,2*j+1,2*NP,2*NP+1))
 			ind2=np.array([0,1])
 			X0[ind]=mhsampler(X0[ind1],e,fold,prosig,ind2)[ind2]
+#np.array version
+#		e=np.zeros((NP,N))
+#		ind=np.zeros((NP,2))
+#		ind1=np.zeros((NP,4))
+		
 		chain[i]=X0	
 	return chain
 	
