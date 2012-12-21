@@ -99,34 +99,51 @@ Pchain=[]
 
 #only works for 1 patch
 #for many patch I want make postfunc returns arrays of ln_prob for each patch while sampling g and retuns total ln_prob while doing shape parameter sampling
-
-def mhsampler(X0,E,fold,prosig,index):
+def mhsampler_general(X0,E,fold,function,prosig,index)
 	X1[index]=X0[index]+np.random.normal(loc=0.0,prosig[index])
-	fnew =postfunc(X1,E)
-        lnprob=min([0,fnew-fold]) 
-	u=math.log(random.random())
+	fnew =function(X1,E)
+	lnprob=(few-fold)
+	u=random.random()
 	if u<lnprob:
 		X0=X1
 		fold=fnew
+	return X0	
+def mhsampler_g(X0,E,fold,function,prosig):
+	X1[:2*NP]=X0[:2*NP]+np.random.normal(loc=0.0,prosig[2*NP])
+	fnew =function(X1,E)
+ #      lnprob=np.min([0,fnew-fold]) 
+ #now fnew is an array (NP) size
+ 	lnprob=(few-fold)
+	u=np.log(np.random.rand(NP)
+	X0[u<lnprob]=X1[u<lnprob]:
 	retrun X0
 
-def gibbs(X0,E,prosig,nsamples):
-	chain=np.zeros((nsamples,ndim))
-	for i in xrange(nsamples):
-		ind=np.array((2*NP,2*NP+1))
-		fold=postfunc(X0,E)
-		X0[ind]=mhsampler(X0,E,fold,prosig,ind)[ind]
+def gibbssampler(X0,E,prosig,nsample):
+	chain=np.zeros((nsample,ndim))
+	for i in xrange(nsample):
+		ind=np.array([2*NP,2*NP+1])
+		X0[ind]=mhsampler_general(X0,E,fold,postfunc,prosig,ind)
+		X0[:2*NP]=mhsampler_g(X0,E,fold,likelihood,prosig)
+		chain[i]=X0
+		
+#I can't get rid of the loop using this one below		
+#def gibbs(X0,E,prosig,nsamples):
+#	chain=np.zeros((nsamples,ndim))
+#	for i in xrange(nsamples):
+#		ind=np.array((2*NP,2*NP+1))
+#		fold=postfunc(X0,E)
+#		X0[ind]=mhsampler(X0,E,fold,prosig,ind)[ind]
 #loops version		
-		for j in xrange(NP):
-			e=E[j*N:(j+1)*N]
-			ind=np.array((2*j,2*j+1))
-			ind1=np.array((2*j,2*j+1,2*NP,2*NP+1))
-			ind2=np.array([0,1])
-			X0[ind]=mhsampler(X0[ind1],e,fold,prosig,ind2)[ind2]
+#		for j in xrange(NP):
+#			e=E[j*N:(j+1)*N]
+#			ind=np.array((2*j,2*j+1))
+#			ind1=np.array((2*j,2*j+1,2*NP,2*NP+1))
+#			ind2=np.array([0,1])
+#			X0[ind]=mhsampler(X0[ind1],e,fold,prosig,ind2)[ind2]
 #np.array version
-#		e=np.zeros((NP,N))
-#		ind=np.zeros((NP,2))
-#		ind1=np.zeros((NP,4))
+#		e=np.zeros((N,NP))
+#		ind=np.zeros((2,NP))
+#		ind1=np.zeros((4,NP))
 		
 		chain[i]=X0	
 	return chain
