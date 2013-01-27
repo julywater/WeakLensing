@@ -73,13 +73,14 @@ def postfunc(X,E):
 	
 	return result
 random.seed(67)
+np.random.seed(67)
 i=0
 p=2.8
 q=2.8
 phi=np.random.rand(N*NP)
 epsilon=np.random.beta(p,q,size=N*NP)
 elipse=epsilon*np.exp(2J*phi*math.pi)
-gamma=0.1*(1-2*np.random.rand(N*NP))+0.1*(1J*(1-2*np.random.rand(N*NP)))
+gamma=0.1*(1-2*np.random.rand(NP))+0.1*(1J*(1-2*np.random.rand(NP)))
 E=shear(elipse,gamma[index])
 f=file("gamma.txt","w")
 for i in range(NP):
@@ -109,9 +110,10 @@ def Gibbssampler(X0,function,E,prosig,Nsteps):
 	Chain=np.zeros((Nsteps,ndim))
 	accnum1=0.0
 	X1=np.zeros(2*NP+2)
-	X1[:]=X0[:]
+#	X1[:]=X0[:]
 	lnprob=np.zeros(NP+1)
 	for i in xrange(Nsteps):
+		X1[:]=X0[:]
 		X1[:2]=X0[:2]+np.random.normal(loc=0.0,scale=prosig[:2])
 		fary1=function(X1,E)
 		lnprob[0]=(fary1[0]-fary0[0])
@@ -121,6 +123,7 @@ def Gibbssampler(X0,function,E,prosig,Nsteps):
 			accnum1+=1
 			X0[:2]=X1[:2]
 			fary0[:]=fary1[:]
+		X1[:2]=X0[:2]	
 		X1[2:]=X0[2:]+np.random.normal(loc=0.0,scale=prosig[2:])
 		fary1=function(X1,E)
 #		print(0,fary0[1:])
