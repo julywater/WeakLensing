@@ -8,7 +8,7 @@ from scipy import special
 from scipy import stats
 N=8
 #number per patch
-NP=5
+NP=64
 #number patches
 NIN=1
 sigma=0.000
@@ -73,7 +73,6 @@ def postfunc(X,E):
 	
 	return result
 random.seed(67)
-np.random.seed(67)
 i=0
 p=2.8
 q=2.8
@@ -101,48 +100,54 @@ P0=np.array((2.8,2.8))
 X0=initial(P0,average) 
 #print(X0)
 prosig=np.zeros(2*NP+2)
-prosig[2:]=0.16
-prosig[:2]=0.01
+prosig[2:]=0.15
+prosig[:2]=0.13
 
 
 def Gibbssampler(X0,function,E,prosig,Nsteps):
 	fary0=function(X0,E)
 	Chain=np.zeros((Nsteps,ndim))
 	accnum1=0.0
+	accnum2=0.0
 	X1=np.zeros(2*NP+2)
-#	X1[:]=X0[:]
+	X1[:]=X0[:]
 	lnprob=np.zeros(NP+1)
 	for i in xrange(Nsteps):
 		X1[:]=X0[:]
 		X1[:2]=X0[:2]+np.random.normal(loc=0.0,scale=prosig[:2])
 		fary1=function(X1,E)
-		lnprob[0]=(fary1[0]-fary0[0])
+#		print(X1)
+#		print(X0)
+#		print('///')
+		lnprob[0]=1.0*(fary1[0]-fary0[0])
+#		print(fary1[0],fary0[0])
+#		print(function(X0,E)[0])
 		u=math.log(random.random())
-	
 		if u<lnprob[0]:
 			accnum1+=1
 			X0[:2]=X1[:2]
 			fary0[:]=fary1[:]
-		X1[:2]=X0[:2]	
+		X1[:]=X0[:]
 		X1[2:]=X0[2:]+np.random.normal(loc=0.0,scale=prosig[2:])
 		fary1=function(X1,E)
-#		print(0,fary0[1:])
-#		print(1,fary1[1:])
 		lnprob[1:]=fary1[1:]-fary0[1:]
 		u=np.log(np.random.rand(NP))
-		print(0,X0[2:])
 		X0[2::2][u<lnprob[1:]]=X1[2::2][u<lnprob[1:]]
 		X0[3::2][u<lnprob[1:]]=X1[3::2][u<lnprob[1:]]
 		fary0[1:][u<lnprob[1:]]=fary1[1:][u<lnprob[1:]]
 		fary0[0]=np.sum(fary0[1:])
+		accnum2+=1.0*len(u[u<lnprob[1:]])/NP
 #		print(lnprob)
-#		print(1,X0[2:])
+#		print(X0)
 		Chain[i]=X0
-	print(accnum1/Nsteps)
-	return Chain.transpose()
-Chain=Gibbssampler(X0,postfunc,E,prosig,100)
-for i in xrange(2*NP+2):
-	print(np.mean(Chain[i]))	
+	print(1.0*accnum1/Nsteps)
+	print(1.0*accnum2/Nsteps)
+#	return Chain.transpose()
+	return Chain
+Chain=Gibbssampler(X0,postfunc,E,prosig,10)
+Chain1=Gibbssampler(Chain[9],postfunc,E,prosig,1000)
+#for i in xrange(2*NP+2):
+#	print(np.mean(Chain[i]))	
 #import matplotlib.pyplot as pl
 #pl.figure()
 #pl.xlim((-0.4,0.4))
