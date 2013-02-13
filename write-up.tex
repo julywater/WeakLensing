@@ -37,21 +37,29 @@ inference
 \section{Introduction}
 
 $\ \ \ \ $Weak Lensing has become one of the most powerful method
-in exploring the dark universe (Al- brecht et al. 2006; Peacock \&
-Schneider 2006 )
+in exploring the distribution of matter in the Universe on large scales
+(Bartelmann \& Schneider 2001,Al- brecht et al. 2006; Peacock \& Schneider
+2006 ).This powerful method has a various astronomical applications.By
+detecting the weak lensing shear or magnification effect we are able
+to reconstruct the mass properties of galaxy clusters,as well as dark
+matter halos(Dahle et al. 2002; Gray et al. 2002; Clowe, Gonzalez
+\& Markevitch 2004;Sheldon et al. 2004)
 
-As dark energy slows the growth of dark matter structures, these in
-turn affect the appearance of distant galaxies, distorting them slightly
-as gravitational fields deflect their light. This distortion is known
-as cosmic shear.()
+General relativity predicts that the path of light from a distant
+galaxy is distorted by the gravitational potential fluctu- ations
+along the line of sight. As dark energy slows the growth of dark matter
+structures, these in turn affect the appearance of distant galaxies,
+distorting them slightly as gravitational fields deflect their light.
+This distortion is known as cosmic shear.()
 
 The measurement of cosmic shear is determined by the amount of distortion
 caused to a forewground galaxy. Due to the isotropic universe the
 expect value of a galaxy's intrinsic complex ellipticity is 0. Therefore
 the comples ellipticity of a stretched galaxies is an unbiased estimation
-of cosmic shear.However, the distortion induced by cosmic shear is
-typically on the order of a few percent,which is significantly smaller
-than the galaxies's intrinsic shape noise(\textasciitilde{}0.1 level).
+of cosmic shear(Bartelmann \& Schneider 2001).However, the distortion
+induced by cosmic shear is typically on the order of a few percent,which
+is significantly smaller than the galaxies's intrinsic shape noise(\textasciitilde{}0.1
+level).
 
 Several beysian or likelihood approaches towards shear measurement
 like lensfit(L. Miller,T. D. Kitching et al,2007;T.D. Kitching, L.
@@ -144,9 +152,10 @@ The inverse function is:
 \end{equation}
 
 \end{verse}
-Then we make N random samples from a selected distribution as the "true" reduced shear on each patch.
+Then we make N samples from the prior distriibution of g.In this paper
+we assume the prior distribution of g is gaussian with $\sigma=0.1$.
 
-Finally we calculated the sheared shape of every galaxy on each patch.
+Finally galaxies in N patches are sheared by N different gamma .
 
 Thus the simulated data we ar going to use is the lensed ellipticity
 of $M\times N$ galaxies. N is the number of patches and M is the
@@ -454,7 +463,7 @@ model of intrinsic shape dstribution.Simply using a step function
 model and a prior regulazier we were able to get similar result as
 when we assume we know the correct model of intrinsic shape distribution.
 
-One intresting thing in shear survey is that the assumption that galaxy
+One intresting in shear survey is that the assumption that galaxy
 pairs have no ellipticity correlation is not entirely accurate. There
 are intrinsic alignments of nearby galaxies due to the alignment of
 angular momentum produced by tidal shear correlations( Heymans C.,
