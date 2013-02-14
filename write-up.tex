@@ -3,6 +3,7 @@
 \documentclass[english]{article}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
+\usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
 
@@ -12,15 +13,18 @@
 %% Because html converters don't know tabularnewline
 \providecommand{\tabularnewline}{\\}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+
 \makeatother
 
 \usepackage{babel}
 \begin{document}
 
-\title{Weak lensing Hierarchy Bayesian Inference }
+\title{Weak Lensing Shear Inference:A Hierarchy Bayesian Approach}
 
 
-\date{02/13/2013}
+\date{02/14/2013}
 \maketitle
 \begin{abstract}
 We present a Hierarchy Bayesian method for shear inference in Weak
@@ -31,7 +35,7 @@ accurate than the traditional average method and (prove to a large
 extent )it is an unbiased estimation of shear.
 
 Key words:gravational lensing-methods;data analysis-methods;bayesian
-inference
+inference 
 \end{abstract}
 
 \section{Introduction}
@@ -46,20 +50,20 @@ matter halos(Dahle et al. 2002; Gray et al. 2002; Clowe, Gonzalez
 \& Markevitch 2004;Sheldon et al. 2004)
 
 General relativity predicts that the path of light from a distant
-galaxy is distorted by the gravitational potential fluctuations
+galaxy is distorted by the gravitational potential fluctu- ations
 along the line of sight. As dark energy slows the growth of dark matter
 structures, these in turn affect the appearance of distant galaxies,
 distorting them slightly as gravitational fields deflect their light.
 This distortion is known as cosmic shear.()
 
 The measurement of cosmic shear is determined by the amount of distortion
-caused to a foreground galaxy. Due to the isotropy of the Universe
-the expect value of a galaxy's intrinsic complex ellipticity $\epsilon$
-is 0. Therefore the comples ellipticity of a stretched galaxies is
-an unbiased estimation of cosmic shear(Bartelmann \& Schneider 2001).However,
-the distortion induced by cosmic shear is typically on the order of
-a few percent,which is significantly smaller than the galaxies's intrinsic
-shape noise(\textasciitilde{}0.1 level).
+caused to foreground galaxies. Due to the isotropy of the Universe
+the expect value of the intrinsic complex ellipticity $\epsilon$
+of a galaxy is 0. Therefore the complex ellipticity of a stretched
+galaxies is an unbiased estimation of cosmic shear(Bartelmann \& Schneider
+2001).However, the distortion induced by cosmic shear is typically
+on the order of a few percent,which is significantly smaller than
+the galaxies's intrinsic shape noise(\textasciitilde{}0.1 level).
 
 Several beysian or likelihood approaches towards shear measurement
 like lensfit(L. Miller,T. D. Kitching et al,2007;T.D. Kitching, L.
@@ -71,8 +75,8 @@ approach in the galaxy shape measurement and evaluated how shear sensitivity
 should be calculated based on posterior distribution of galaxies shape.{]}
 However these methods mostly focus on the shape measurement of a single
 galaxy.Given an telescope that has perfect measurement on galaxies'
-shape their shear estimation method has no difference with traditional
-average method.
+shape their shear estimation method has no difference from traditional
+averaging method.
 
 While in this paper what we want to focus is how a hierarchy beysian
 approach can infer cosmic shear independently from which way the galaxy
@@ -88,21 +92,21 @@ in our Hierarchy Bayesian method we avoid to making up any empirical
 model for intrinsic ellipticity distribution.We will show that using
 a free form model for intrinsic ellipticity distribution and infer
 its parameters together with cosmic shear we can still out perform
-the traditional averaging method.
+the traditional average method.
 
 The graphic model describe the hierarchy bayesian method in detail.
-We assume in one sky patch there is a uniform 
+We assume in one sky patch there is a uniform
 
 shear that applies on all the galaxies in that patch,and galaxies
 in all patches have the same intrinsic ellipticity distribution.In
 this way even if the number of galaxies in one patch is small,if we
 have enough sky patches we can still get a good estimation of $\alpha$,which
 is the key to have a good estimation of shear $g$ in each patch which
-is the quantity we cares about. 
+is the quantity we cares about.
 
 \includegraphics[scale=0.5]{yike}
 
-This report is orgnized as following: First we introduced the lensing
+This report is orgnized as following: First we introduce the lensing
 formula used in weak lensing region and how we simulated the lensed
 ellpticity of galaxies.Then we introduced the likelihood function
 $P(\epsilon_{\ell}|g,\alpha)$ which is the probability of having
@@ -119,7 +123,7 @@ bias of this HB inference.
 
 \subsection{Data Generation}
 
-$\ \ \ \ $The definition of complex ellipticity of a galaxy is
+$\ \ \ \ $The definition of complex ellipticity of a galaxy is 
 \begin{equation}
 \epsilon=\frac{1-q}{1+q}e^{2i\phi}
 \end{equation}
@@ -127,8 +131,8 @@ $\ \ \ \ $The definition of complex ellipticity of a galaxy is
 is the orientation angle of the galaxy.
 
 First the unlensed complex ellipticity $\epsilon$ is generated according
-to probability distribution:$P(|\epsilon|)=Beta(|\epsilon|,2.8,2.8)$
-and $P(\phi)=\frac{1}{\pi}$. $\epsilon=|\epsilon|e^{2\phi i}$.
+to probability distribution:$f(|\epsilon|)=Beta(|\epsilon|,2.8,2.8)$
+and $f(\phi)=\frac{1}{\pi}$. $\epsilon=|\epsilon|e^{2\phi i}$.
 
 \includegraphics[scale=0.5]{sourceepsilon}
 
@@ -144,9 +148,9 @@ of weaklensing is like:
 $\epsilon_{\ell}$is the lensed ellipticity and $\epsilon_{0}$is
 unlensed ellipticity.g is the reduced shear $g=\frac{\gamma}{1-k}$.k
 denotes convergence and $\gamma$ denotes shear.In weak lensing region
-$g\approx\mbox{\ensuremath{\gamma}}$
+$g\approx\mbox{\ensuremath{\gamma}}$ 
 \begin{verse}
-The inverse function is:
+The inverse function is: 
 \begin{equation}
 \epsilon_{0}=\frac{\epsilon_{\ell}-g}{1-g^{*}\epsilon_{\ell}}
 \end{equation}
@@ -185,7 +189,7 @@ Due to the homogeneous universe,we can believe that all the galaxies
 in different sky patches have the same intrinsic shape distribution.Therefore,in
 order to get higher accuracy,what we do is to infere reduced shears
 of a number of sky patches simultaneously with their common shape
-parameter $\alpha$.
+parameter $\alpha$. 
 \begin{equation}
 L(\vec{g},p,q|\epsilon_{\ell})=\prod_{i}\prod_{j}P(\epsilon_{0-j}(g_{i})|\alpha)|\frac{\partial(x_{0-j},y_{0-j})}{\partial(x_{\ell-j},y_{\ell-j})}|)
 \end{equation}
@@ -199,10 +203,10 @@ the intrinsic ellipticity distribution is a beta distribution with
 unknown parameter p and q.,The other one is step function model.Here
 we devide 2D plane into a number of bins,and probability on each bin
 is a free parameter.In later section we will show that we can get
-similar results from these two models. 
+similar results from these two models.
 
 $|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon|,\phi)}|$
-is the Jacobi Determinant term.
+is the Jacobi Determinant term. 
 \begin{equation}
 |\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon_{\ell}|,\phi_{\ell})}|=|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(x_{0},y_{0})}*\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}*\frac{\partial(x_{\ell},y_{\ell})}{\partial(|\epsilon_{\ell}|,\phi_{\ell})}|=\frac{|\epsilon_{\ell}|}{|\epsilon_{0}|}*|\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}|
 \end{equation}
@@ -241,7 +245,7 @@ While making the posterior samples we choose to use the classical
 Gibbs sampler.
 
 In Gibbs sampling ,samples of variable $x_{j}$ is made from the conditional
-probability distribution:$p(x_{j}^{(i)}|x_{1}^{(i)},....,x_{j-1}^{(i)},x_{j+1}^{(i-1)}...)$
+probability distribution:$p(x_{j}^{(i)}|x_{1}^{(i)},....,x_{j-1}^{(i)},x_{j+1}^{(i-1)}...,x_{n}^{(i-1)})$
 
 While the conditional distribution of one variable given all others
 is just proportional to the joint distribution
@@ -274,7 +278,7 @@ plane with constraint $|g|<1.$
 
 Figure 2 shows the samples of g for 64 patches and 8 galaxies in each
 patch.(Here for present reseaon we set the distribution of ``true''
-g to be 2D Gaussian with sigma=0.1) 
+g to be 2D Gaussian with sigma=0.1)
 
 The red '+' sign denotes the mean value of lensed ellipticity.While
 the blue '+' denotes the mean value of MCMC samples of gamma.The cross
@@ -316,7 +320,7 @@ r$\in$(0,1) into 10 bins .The probability of each bin is $p_{i}=e^{\alpha_{i}}$
 From practice we find that a prior smooth regularzation on $\alpha$
 is needed to obtain a good estimation on shear g.
 
-The prior distribution we used on $\alpha$ is :
+The prior distribution we used on $\alpha$ is : 
 \begin{equation}
 Prior(\alpha)=exp(-\xi*\sum(\alpha_{i}-\alpha_{i-1})^{2})
 \end{equation}
@@ -376,16 +380,16 @@ For beta function model :
 
 \begin{tabular}{|c|c|c|}
 \hline 
- & Expect Value & STD\tabularnewline
+ & Expect Value  & STD\tabularnewline
 \hline 
 \hline 
-m1 & -0.00420 & 0.00304\tabularnewline
+m1  & -0.00420  & 0.00304\tabularnewline
 \hline 
-c1 & 1.66$*10^{-4}$ & 1.73$*10^{-4}$\tabularnewline
+c1  & 1.66$*10^{-4}$  & 1.73$*10^{-4}$\tabularnewline
 \hline 
-m2 & -0.00386 & 0.00290\tabularnewline
+m2  & -0.00386  & 0.00290\tabularnewline
 \hline 
-c2 & 2.30$*10^{-4}$ & 1.81$*10^{-4}$\tabularnewline
+c2  & 2.30$*10^{-4}$  & 1.81$*10^{-4}$\tabularnewline
 \hline 
 \end{tabular}
 
@@ -393,59 +397,60 @@ For step function model:
 
 \begin{tabular}{|c|c|c|}
 \hline 
- & Expect Value & STD\tabularnewline
+ & Expect Value  & STD\tabularnewline
 \hline 
 \hline 
-m1 & 0.00502 & 0.00287\tabularnewline
+m1  & 0.00502  & 0.00287\tabularnewline
 \hline 
-c1 & 2.05$*10^{-4}$ & 1.73$*10^{-4}$\tabularnewline
+c1  & 2.05$*10^{-4}$  & 1.73$*10^{-4}$\tabularnewline
 \hline 
-m2 & 0.00156 & 0.00292\tabularnewline
+m2  & 0.00156  & 0.00292\tabularnewline
 \hline 
-c2 & 2.14$*10^{-4}$ & 1.87{*}$10^{-4}$\tabularnewline
+c2  & 2.14$*10^{-4}$  & 1.87{*}$10^{-4}$\tabularnewline
 \hline 
 \end{tabular}
 
 \includegraphics[scale=0.5]{step_g1}
 
-\includegraphics[scale=0.5]{g2_step}
+\includegraphics[scale=0.5]{g2_step} 
 \begin{quote}
 Figure 9: Linear fit of $\delta g_{i}-g_{i}$ relationship for step
-function model.
+function model. 
 \end{quote}
 As we can see from the data and graph no significant systematic bias
 can be found using 10,000 data sets.With that amount of data we able
-to narrow down m to $\sim10^{-3}$ and c to $\sim10^{-4}$. 
+to narrow down m to $\sim10^{-3}$ and c to $\sim10^{-4}$.
 
 In Table 1 we show the requirements on m, c for current, upcoming
 and future cosmic shear surveys (Joe Zuntz ,axrive 2013)
 
 \begin{tabular}{|c|c|c|}
 \hline 
- & m & c\tabularnewline
+ & m  & c\tabularnewline
 \hline 
 \hline 
-current & 0.02 & 0.001\tabularnewline
+current  & 0.02  & 0.001\tabularnewline
 \hline 
-upcoming & 0.004 & 0.0006\tabularnewline
+upcoming  & 0.004  & 0.0006\tabularnewline
 \hline 
-future & 0.001 & 0.0003\tabularnewline
+future  & 0.001  & 0.0003\tabularnewline
 \hline 
 \end{tabular}
 
-Compared with our data,we can see that our method can at least support
-upcoming cosmic shear surveys.Note that we only used 10,000 data sets
-to quantify m,c due to limited computational time and the uncertainty
-on $\hat{g}$ is large(\textasciitilde{}0.1),if much more data sets
-were collected, these number will probabily be significantly lowered.
+Compare this table with our data,we can see that our method can at
+least support upcoming cosmic shear surveys.Note that we only used
+10,000 data sets to quantify m,c due to limited computing time and
+the uncertainty on $\hat{g}$ is large(\textasciitilde{}0.1),if much
+more data sets were collected, these number will probably be significantly
+lowered.
 
 
 \section{Conclusion}
 
-Here we present a Hierarchy Bayesian way in shear inference. Our method
-successfully inferes the cosmic shears of different sky patches and
-the intrinsic shape parameter synchronously.We showed that in the
-area that galaxy density is low,our method can out perform traditional
+Here we present a Hierarchy Bayesian method of shear inference. Our
+method successfully infers the cosmic shears of different sky patches
+and the intrinsic shape parameter synchronously.We showed that in
+the area that galaxy density is low,our method can out perform traditional
 averagemethod by \textasciitilde{}0.01 level. While in most cases
 cosmic shear is just around this level. Also we quantify the level
 of multiplicative and additive error,and shows this method has no
@@ -473,5 +478,5 @@ the ellipticity the first assumption of traditional average method
 $<\epsilon_{0}>=0$ does not stands any more,while for this Hierarchy
 Bayesian method though we are also using the assumption that intrinsic
 orientational angle distribution is a flat distribution, we can just
-re-model it once more information on galaxy shape coorelation is uncovered.
+re-model it once more information on galaxy shape coorelation is uncovered. 
 \end{document}
