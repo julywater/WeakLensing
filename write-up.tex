@@ -24,7 +24,7 @@
 \title{Weak Lensing Shear Inference:A Hierarchy Bayesian Approach}
 
 
-\date{02/14/2013}
+\date{02/16/2013}
 \maketitle
 \begin{abstract}
 We present a Hierarchy Bayesian method for shear inference in Weak
@@ -237,6 +237,20 @@ issue we restrict p always larger than 2.
 
 The Jacobi term $|\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}|$
 and Beta function $Beta(p,q)$ are calculated numerically.
+
+One thing to note is that the likelihood of g in patch i only depends
+on the shape parameters but not dependent to g in other patch.Therefore,the
+marginalized likelihood of shape parameters has an equation like:
+
+\begin{equation}
+\ell(\alpha)=\prod_{i}\ell_{i}(\alpha|data_{i})
+\end{equation}
+
+
+$\ell_{i}(\alpha|data_{i})$ is the marginalized likelihood function
+calculated with data in the ith patch.From this formula we can see
+how better estimation of $\alpha$ will be obtained if we infer more
+sky patches simultaneously. 
 
 
 \subsection{Gibbs Sampler}
