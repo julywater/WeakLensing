@@ -1,11 +1,12 @@
-%% LyX 2.0.2 created this file.  For more info, see http://www.lyx.org/.
+%% LyX 2.0.4 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
 \documentclass[english]{article}
 \usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
+\usepackage[utf8]{luainputenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{esint}
 
 \makeatletter
 
@@ -235,7 +236,7 @@ We can see that when p<2 $L(g,\alpha|\epsilon_{\ell})$ will have
 singular points at $g=\epsilon_{\ell}$.In this paper to avoid this
 issue we restrict p always larger than 2.
 
-The Jacobi term $|\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}|$
+The Jacobean term $|\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}|$
 and Beta function $Beta(p,q)$ are calculated numerically.
 
 One thing to note is that the likelihood of g in patch i only depends
@@ -362,6 +363,52 @@ linr is true distribution Beta(2.8,2.8)
 The accuracy we got from beta function model and step function model
 are similar.They both out perform the traditional average method by
 percentage level.
+
+Figure 10 shows how the mean square error of the Hierarchy Bayesian
+method varies with the number of sky patches used,in comparison with
+traditional average method and likelihood analysis with correct P($\epsilon$)
+hard-set.from this figure we can see that the mean square error of
+the Hierarchy Bayesian method decreases as the number of patches goes
+up,while this trend is less significant as number of patches becomes
+larger.Moreover,down to 8 patches this Hierarchy Bayesian method still
+out perform the traditional average method. Meanwhile the likelihood
+analysis with correct P($\epsilon$) shows higher accuracy than Hierarchy
+Bayesian method. That is consistent with our speculation. When the
+number of patches goes to infinity ,we will have correct estimation
+on P($\epsilon$) and Hierarchy Bayesian method converges to likelihood
+analysis with correct $P(\epsilon)$ hard-set,ignoring the difference
+between our step function model and real beta function,of course.
+
+\includegraphics[scale=0.5]{Np_step}
+
+\includegraphics[scale=0.5]{N16NP_vary}
+
+Figure 10:Mean square error VS Number of patches.In the upper graph
+number of galaxies per patch is 8 while in the lowwer it's 16.The
+Green line is mean square error of traditional average while the red
+line is that of likelihood analysis with correct $P(\epsilon)$ .
+
+
+\subsection{Shape Measurement Error}
+
+In this part we will discuss how the shape measurement error will
+affect the relative accuracy of this Hierarchy Bayesian method.As
+mentioned before ,we try to avoid any image process which is another
+important aspect of Weak Lensing survey ,so we simply assume a 2D
+Gaussian noise on ellipticity measurement.
+
+With that Gaussian noise the data we can obtain becomes the observed
+ellipticity $\epsilon_{ob}$,whoes probability distribution is 
+\begin{equation}
+f(\epsilon_{ob}|\epsilon_{\ell})\varpropto e^{-\frac{(\epsilon_{ob}-\epsilon_{\ell})^{2}}{2\sigma^{2}}}
+\end{equation}
+
+
+Therefore the likelihood of $g$ and $\alpha$ becomes
+\begin{equation}
+L(g,\alpha|\epsilon_{ob})=P(\epsilon_{ob}|g,\alpha)=\intop f(\epsilon_{ob}|\epsilon_{\ell})P(\epsilon_{\ell}|g,\alpha)d\epsilon_{\ell}
+\end{equation}
+
 
 
 \section{Systematic Bias}
