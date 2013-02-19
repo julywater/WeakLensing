@@ -1,0 +1,29 @@
+%% LyX 2.0.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{luainputenc}
+\usepackage{esint}
+\usepackage{babel}
+\begin{document}
+One major limitation of the step function model is that a prior regulazier
+$Prior(\alpha)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})$ is needed
+to infer the P($\epsilon$) and g correctly and the constant prefactor
+$\xi$ needs to be tuned.In our test the true P($\epsilon$) is set
+to be a smooth function ,which is a natural assumption for P($\epsilon$).The
+effect of this prior regulazier is to keep the inferred P($\epsilon$)
+smooth. if the constant $\xi$ is not big enough the inferred P($\epsilon$)
+will have an oscilation noise and the accuracy of g inference will
+also decreases. Thus an empirical formula for $\xi$ is helpful to
+tune this prefactor by simulations. from several tests we find that
+$\xi$ is proportional to the mean data density and can be approximated
+by this empirical formula.
+\begin{equation}
+\xi=<\rho>/256
+\end{equation}
+
+
+Here $<\rho>=\int Nf^{2}(x)dx$ is the mean data density. With the
+help of this empirical formula,$\xi$ can be tuned by doing some simulation
+which has similar data distribution with the real data.
+\end{document}
