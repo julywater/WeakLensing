@@ -25,7 +25,7 @@
 \title{Weak Lensing Shear Inference:A Hierarchy Bayesian Approach}
 
 
-\date{02/16/2013}
+\date{02/19/2013}
 \maketitle
 \begin{abstract}
 We present a Hierarchy Bayesian method for shear inference in Weak
@@ -207,37 +207,15 @@ is a free parameter.In later section we will show that we can get
 similar results from these two models.
 
 $|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon|,\phi)}|$
-is the Jacobi Determinant term. 
+is the Jacobean Determinant term. 
 \begin{equation}
 |\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon_{\ell}|,\phi_{\ell})}|=|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(x_{0},y_{0})}*\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}*\frac{\partial(x_{\ell},y_{\ell})}{\partial(|\epsilon_{\ell}|,\phi_{\ell})}|=\frac{|\epsilon_{\ell}|}{|\epsilon_{0}|}*|\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}|
 \end{equation}
 
 
 $(x_{0},y_{0})$ and $(x_{\ell},y_{\ell})$ are the Cartesian coordinates
-of $\epsilon_{0}$ and $\epsilon_{\ell}$ on the complex plane.
-
-When $|\epsilon_{0}|\longmapsto0$ ,$\epsilon\approx\epsilon_{0}+g$.Therefore,$|\frac{\partial(x_{0},y_{0)}}{\partial(x,y)}|\mapsto1$.Thus
-when $|\epsilon_{0}|\mapsto0$ the Jacobi term $|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon|,\phi)}|\mapsto\infty$.
-
-In this paper 
-\begin{equation}
-P(\epsilon_{0}|\alpha)=|\epsilon_{0}|^{p-1}(1-|\epsilon_{0}|)^{q-1}/Beta(p,q)
-\end{equation}
-
-
-Thus
-
-\begin{equation}
-L(g,\alpha|\epsilon_{\ell})\propto|\epsilon_{0}|^{p-2}(1-|\epsilon_{0}|)^{q-1}|\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}|/Beta(p,q)
-\end{equation}
-
-
-We can see that when p<2 $L(g,\alpha|\epsilon_{\ell})$ will have
-singular points at $g=\epsilon_{\ell}$.In this paper to avoid this
-issue we restrict p always larger than 2.
-
-The Jacobean term $|\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}|$
-and Beta function $Beta(p,q)$ are calculated numerically.
+of $\epsilon_{0}$ and $\epsilon_{\ell}$ on the complex plane.This
+Jacobean term is numerically computaed.
 
 One thing to note is that the likelihood of g in patch i only depends
 on the shape parameters but not dependent to g in other patch.Therefore,the
@@ -291,6 +269,29 @@ parameters to be sampled.The initial states comes from the result
 of traditional average.The prior of $g$ is flat distribution on 2D
 plane with constraint $|g|<1.$
 
+When $|\epsilon_{0}|\longmapsto0$ ,$\epsilon\approx\epsilon_{0}+g$.Therefore,$|\frac{\partial(x_{0},y_{0)}}{\partial(x,y)}|\mapsto1$.Thus
+when $|\epsilon_{0}|\mapsto0$ the Jacobi term $|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon|,\phi)}|\mapsto\infty$.
+
+In this section 
+\begin{equation}
+P(\epsilon_{0}|\alpha)=|\epsilon_{0}|^{p-1}(1-|\epsilon_{0}|)^{q-1}/Beta(p,q)
+\end{equation}
+
+
+Thus
+
+\begin{equation}
+L(g,\alpha|\epsilon_{\ell})\propto|\epsilon_{0}|^{p-2}(1-|\epsilon_{0}|)^{q-1}|\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}|/Beta(p,q)
+\end{equation}
+
+
+We can see that when p<2 $L(g,\alpha|\epsilon_{\ell})$ will have
+singular points at $g=\epsilon_{\ell}$.In this section to avoid this
+issue we restrict p always larger than 2.
+
+The Jacobean term $|\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}|$
+and Beta function $Beta(p,q)$ are calculated numerically.
+
 Figure 2 shows the samples of g for 64 patches and 8 galaxies in each
 patch.(Here for present reseaon we set the distribution of ``true''
 g to be 2D Gaussian with sigma=0.1)
@@ -337,7 +338,7 @@ is needed to obtain a good estimation on shear g.
 
 The prior distribution we used on $\alpha$ is : 
 \begin{equation}
-Prior(\alpha)=exp(-\xi*\sum(\alpha_{i}-\alpha_{i-1})^{2})
+Prior(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
 \end{equation}
 
 
@@ -364,7 +365,13 @@ The accuracy we got from beta function model and step function model
 are similar.They both out perform the traditional average method by
 percentage level.
 
-Figure 10 shows how the mean square error of the Hierarchy Bayesian
+Figur 10 shows the distribution of $g_{estimation}-g_{true}$.From
+the figure we can see that it's a gaussian like distribution centrered
+at 0.
+
+\includegraphics[scale=0.5]{dg2}
+
+Figure 11 shows how the mean square error of the Hierarchy Bayesian
 method varies with the number of sky patches used,in comparison with
 traditional average method and likelihood analysis with correct P($\epsilon$)
 hard-set.from this figure we can see that the mean square error of
@@ -383,10 +390,39 @@ between our step function model and real beta function,of course.
 
 \includegraphics[scale=0.5]{N16NP_vary}
 
-Figure 10:Mean square error VS Number of patches.In the upper graph
+Figure 11:Mean square error VS Number of patches.In the upper graph
 number of galaxies per patch is 8 while in the lowwer it's 16.The
 Green line is mean square error of traditional average while the red
 line is that of likelihood analysis with correct $P(\epsilon)$ .
+
+One limitation of the step function model is that it needs to be \textit{regularized};
+this is achieved by assigning a prior PDF for the step heights $\vec{\alpha}$.
+We use the form $Prior(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})$
+when inferring the P($\epsilon$) and $g$. The choice of this functional
+form corresponds to the assumption that the true P($\epsilon$) is
+smooth, which seems fairly natural. This function has a hyperparameter,
+$\xi$, that needs to be set somehow. If $\xi$ is too small, the
+inferred P($\epsilon$) will be too noisy, and the accuracy of the
+$g$ inference will decrease. Likewise, choosing an $\xi$ that is
+too large, the inferred P($\epsilon$) will be too smooth, and the
+data will be under-fitted. In principle one could infer $\xi$ form
+the data at hand, but in practice we find that .
+
+a flat prior PDF for $\xi$ will make the inferred $P(\epsilon)$
+too noisy.Therefore to make the inferred $P(\epsilon)$ smooth enough
+we still need to assign some prior PDF on $\xi$ that pushes $\xi$
+to a larger region,and this prior PDF also need to be tuned. We find
+that $\xi$ is proportional to the mean data number density and can
+be approximated by the following empirical formula: 
+\begin{equation}
+\xi=N<\rho(|\epsilon|)>/256*\frac{Nbin}{10}
+\end{equation}
+Here $<\rho|\epsilon|>=\int\rho(|\epsilon|)^{2}d(|\epsilon|)$ corresponds
+to the average of data number density weighted with number density,and
+Nbin is the number of bins used in step function model. With the help
+of this empirical formula, we can tune this prefactor $\xi$ by doing
+some simulation which has similar data distribution with the real
+data. 
 
 
 \subsection{Shape Measurement Error}
@@ -411,10 +447,10 @@ L(g,\alpha|\epsilon_{ob})=P(\epsilon_{ob}|g,\alpha)=\intop f(\epsilon_{ob}|\epsi
 
 
 
-\section{Systematic Bias}
+\section{Systematical Bias}
 
-In this section,we measured the levels of possible systemmatic bias
-led by this HB method.
+$\ \ \ \ $In this section,we measured the levels of possible systemmatical
+bias led by this HB method.
 
 Following Heymans et al. (2006), we quantify the systematic bias in
 in terms of the multiplicative error m and additive error c on the
@@ -424,64 +460,62 @@ true shear $g^{true}$
 \end{equation}
 
 
-The accuracy in Weak Lensing measurement depends on both galaxies
-shape measurement and shear inference period.In this paper our main
-concern is how to infere shear in a HB method instead off traditional
-averaging method and it does not involve the shape measurement part
-.Therefore we assume we have perfect galaxies ellipticity measurement,and
-all the possible inaccuracy is due to this HB shear inference method.
+The accuracy of Weak Lensing survey depends on both galaxy shape measurement
+and shear inference .In this paper our main concern is how to infere
+shear in a HB method instead off traditional averaging method and
+it does not involve the shape measurement part .Therefore we assume
+we have perfect galaxies ellipticity measurement,and all the possible
+inaccuracy is due to this HB shear inference method.
 
-Using 10,000 data sets we are able to get the value of m and c for
-both beta function and step function model.Each data set we use in
-this section has 64 patches with 8 galaxies in eah patch.
+We calculated the average of $g^{estimated}-g^{true}$ of 10,000 data
+sets as described above.Each data set has 64 patches and 8{*}64 galaxies,and
+the true P($\epsilon$) is Beta(2.8,2.8) .For both Beta function model
+and step funtion model we then determin the best fitted parameters
+m and c of fomula (15).Figure 9 shows an example of step funtion model
+with prior prefator $\xi=3$.The results of the systematical bias
+analysis are tabulated in table 1.
 
-The region for $g_{i}^{true}$ is -0.1\textasciitilde{}0.1 .
+\includegraphics[scale=0.5]{g1bias}
 
-For beta function model :
-
-\begin{tabular}{|c|c|c|}
-\hline 
- & Expect Value  & STD\tabularnewline
-\hline 
-\hline 
-m1  & -0.00420  & 0.00304\tabularnewline
-\hline 
-c1  & 1.66$*10^{-4}$  & 1.73$*10^{-4}$\tabularnewline
-\hline 
-m2  & -0.00386  & 0.00290\tabularnewline
-\hline 
-c2  & 2.30$*10^{-4}$  & 1.81$*10^{-4}$\tabularnewline
-\hline 
-\end{tabular}
-
-For step function model:
-
-\begin{tabular}{|c|c|c|}
-\hline 
- & Expect Value  & STD\tabularnewline
-\hline 
-\hline 
-m1  & 0.00502  & 0.00287\tabularnewline
-\hline 
-c1  & 2.05$*10^{-4}$  & 1.73$*10^{-4}$\tabularnewline
-\hline 
-m2  & 0.00156  & 0.00292\tabularnewline
-\hline 
-c2  & 2.14$*10^{-4}$  & 1.87{*}$10^{-4}$\tabularnewline
-\hline 
-\end{tabular}
-
-\includegraphics[scale=0.5]{step_g1}
-
-\includegraphics[scale=0.5]{g2_step} 
+\includegraphics[scale=0.5]{g2bias}
 \begin{quote}
 Figure 9: Linear fit of $\delta g_{i}-g_{i}$ relationship for step
 function model. 
-\end{quote}
-As we can see from the data and graph no significant systematic bias
-can be found using 10,000 data sets.With that amount of data we able
-to narrow down m to $\sim10^{-3}$ and c to $\sim10^{-4}$.
 
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Beta Model & Expect Value  & $\sigma$ & S/N\tabularnewline
+\hline 
+\hline 
+m1  & -0.00420  & 0.00304 & 1.38\tabularnewline
+\hline 
+c1  & 1.66$*10^{-4}$  & 1.73$*10^{-4}$ & 0.96\tabularnewline
+\hline 
+m2  & -0.00386  & 0.00290 & 1.31\tabularnewline
+\hline 
+c2  & 2.30$*10^{-4}$  & 1.81$*10^{-4}$ & 1.27\tabularnewline
+\hline 
+\end{tabular}
+
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Step Model & Expect Value  & $\sigma$ & S/N\tabularnewline
+\hline 
+\hline 
+m1  & -6.09{*}$10^{-4}$ & 0.00239 & 0.25\tabularnewline
+\hline 
+c1  & 1.82$*10^{-4}$  & 1.44$*10^{-4}$ & 1.26\tabularnewline
+\hline 
+m2  & 0.00178  & 0.00281 & 0.63\tabularnewline
+\hline 
+c2  & 2.978$*10^{-4}$  & 1.71{*}$10^{-4}$ & 1.74\tabularnewline
+\hline 
+\end{tabular}
+
+Table 1:Tabulated measures of multiplicative error <$m_{i}>$ and
+additive error $<c_{i}>$and their standard deviations ,along with
+their S/N ratio. 
+\end{quote}
 In Table 1 we show the requirements on m, c for current, upcoming
 and future cosmic shear surveys (Joe Zuntz ,axrive 2013)
 
