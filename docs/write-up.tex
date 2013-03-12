@@ -22,21 +22,29 @@
 \usepackage{babel}
 \begin{document}
 
-\title{Weak Lensing Shear Inference:A Hierarchy Bayesian Approach}
+\title{Weak Lensing Shear Inference:A Hierarchical Bayesian Approach}
 
 
-\date{02/19/2013}
+\date{02/27/2013}
 \maketitle
 \begin{abstract}
-We present a Hierarchy Bayesian method for shear inference in Weak
-Lensing survey. With this method we are able to infer synchronously
-cosmic shear at different sky patches as well as the intrinsic shape
-distribution. We show that this Hierarchy Bayesian method is more
-accurate than the traditional average method and (prove to a large
-extent )it is an unbiased estimation of shear.
+We present an Hierarchical Bayesian approach to infer the shear map
+caused by Weak Lensing effect,by solving a toy weak lensing problem,in
+which we set a uniform shear on each sky patch and we have galaxies'
+ellipticity data either with no measurement error or a simple 2-D
+Gaussian noise. This hierarchical inference involves learning the
+parameters of an exceedingly flexible model for the distribution of
+unlensed galaxies' ellipticity, subject to a constraint that this
+unlensed distribution is isotropical on ellipticity orientaion.It
+is showed that using this flexible model P($\epsilon$|$\alpha$),we
+are able to infer shears of different sky patches and their common
+unlensed ellipticity distribution simultaneously.Though the average
+of galaxies' ellipticity gives a simple estimation of cosmological
+shear,we show that this hierarchical Bayesian method is more accurate
+and precise.
 
-Key words:gravational lensing-methods;data analysis-methods;bayesian
-inference 
+Key words:gravational lensing-methods;data analysis-methods;hierarchical
+bayesian inference 
 \end{abstract}
 
 \section{Introduction}
@@ -179,43 +187,40 @@ on some parasmeters $\alpha$,the likelihood of reduced shear $g$
 and parameter $\alpha$ is like:
 
 \begin{equation}
-L(g,\alpha|\epsilon_{\ell})=P(\epsilon_{\ell}|g,\alpha)=P(\epsilon_{0}(g)|\alpha)*|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon_{\ell}|,\phi_{\ell})}|
+L(\vec{g},\alpha|\epsilon_{\ell})=p(\epsilon_{\ell}|\vec{g},\alpha)=P(\epsilon_{0}(\vec{g})|\alpha)*|\frac{\partial\epsilon_{0}}{\partial\epsilon_{\ell}}|
 \end{equation}
 
 
-$\epsilon_{0,}\epsilon_{\ell,}$ means the unlensed and lensed elliticity.
-$\alpha$ the parameter of the distribution of unlensed ellipticity.
+Note that both $\epsilon_{0}$ and $\epsilon_{\ell}$are complex numbers.So
+$|\frac{\partial\epsilon_{0}}{\partial\epsilon_{\ell}}|$ is the Jacobian
+determinant term.Here the prior distribtuion we use for $\vec{g}$
+is a 2Dflat distribution in the region $|g|<1$.Therefore $prior(\vec{g)}=\begin{cases}
+1 & |\vec{g}|<1\\
+0 & |\vec{g}|>1
+\end{cases}$
 
-Due to the homogeneous universe,we can believe that all the galaxies
-in different sky patches have the same intrinsic shape distribution.Therefore,in
-order to get higher accuracy,what we do is to infere reduced shears
-of a number of sky patches simultaneously with their common shape
-parameter $\alpha$. 
+The prior of $\alpha$ some how depends on the model we choose for
+intrinsic ellipticity distribution .When we use the step function
+model for P($\epsilon_{0}$),we find that we need to use a prior on
+$\alpha$ .
 \begin{equation}
-L(\vec{g},p,q|\epsilon_{\ell})=\prod_{i}\prod_{j}P(\epsilon_{0-j}(g_{i})|\alpha)|\frac{\partial(x_{0-j},y_{0-j})}{\partial(x_{\ell-j},y_{\ell-j})}|)
+Prior(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
 \end{equation}
 
 
-i denotes ith patch and j denotes jth galaxies in a patch.
-
-In this toy model,we choose two models for the distribution of unlensed
-ellipticity :One is Beta distribution model.In this model we assume
-the intrinsic ellipticity distribution is a beta distribution with
-unknown parameter p and q.,The other one is step function model.Here
-we devide 2D plane into a number of bins,and probability on each bin
-is a free parameter.In later section we will show that we can get
-similar results from these two models.
-
-$|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon|,\phi)}|$
-is the Jacobean Determinant term. 
+Given the likehood functions and priors we can also calculated the
+marginalized likelihood function.
 \begin{equation}
-|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon_{\ell}|,\phi_{\ell})}|=|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(x_{0},y_{0})}*\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}*\frac{\partial(x_{\ell},y_{\ell})}{\partial(|\epsilon_{\ell}|,\phi_{\ell})}|=\frac{|\epsilon_{\ell}|}{|\epsilon_{0}|}*|\frac{\partial(x_{0},y_{0})}{\partial(x_{\ell},y_{\ell})}|
+p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\alpha)p(\alpha|\vec{g})d\alpha
 \end{equation}
 
 
-$(x_{0},y_{0})$ and $(x_{\ell},y_{\ell})$ are the Cartesian coordinates
-of $\epsilon_{0}$ and $\epsilon_{\ell}$ on the complex plane.This
-Jacobean term is numerically computaed.
+Since $p(\alpha)$ does not explicitly depends on $\vec{g}$ .$p(\alpha|\vec{g})$is
+just $Prior(\vec{\alpha}|\xi)$.Therefore,we have marginalized likehood
+\begin{equation}
+p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\alpha)Prior(\vec{\alpha}|\xi)d\alpha
+\end{equation}
+
 
 One thing to note is that the likelihood of g in patch i only depends
 on the shape parameters but not dependent to g in other patch.Therefore,the
@@ -270,7 +275,7 @@ of traditional average.The prior of $g$ is flat distribution on 2D
 plane with constraint $|g|<1.$
 
 When $|\epsilon_{0}|\longmapsto0$ ,$\epsilon\approx\epsilon_{0}+g$.Therefore,$|\frac{\partial(x_{0},y_{0)}}{\partial(x,y)}|\mapsto1$.Thus
-when $|\epsilon_{0}|\mapsto0$ the Jacobi term $|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon|,\phi)}|\mapsto\infty$.
+when $|\epsilon_{0}|\mapsto0$ the Jacobean term $|\frac{\partial(|\epsilon_{0}|,\phi_{0})}{\partial(|\epsilon|,\phi)}|\mapsto\infty$.
 
 In this section 
 \begin{equation}
@@ -316,9 +321,6 @@ for both g1 and g2.
 
 To compare the accuracy with traditional averaging method we calculate
 the value of $\sqrt{mean(\hat{g}}-g^{true})^{2}$
-
-for HB method the typical value is \textasciitilde{}0.17 While for
-traditional averaging method it's \textasciitilde{}0.18.
 
 Though the value of mean square error depends on specific mock data
 used,HB method consistantly out perform traditional averaging method
@@ -389,6 +391,8 @@ between our step function model and real beta function,of course.
 \includegraphics[scale=0.5]{Np_step}
 
 \includegraphics[scale=0.5]{N16NP_vary}
+
+\includegraphics[scale=0.5]{errorN8}
 
 Figure 11:Mean square error VS Number of patches.In the upper graph
 number of galaxies per patch is 8 while in the lowwer it's 16.The
@@ -506,9 +510,9 @@ m1  & -6.09{*}$10^{-4}$ & 0.00239 & 0.25\tabularnewline
 \hline 
 c1  & 1.82$*10^{-4}$  & 1.44$*10^{-4}$ & 1.26\tabularnewline
 \hline 
-m2  & 0.00178  & 0.00281 & 0.63\tabularnewline
+m2  & -3.48{*}$10^{-4}$ & 0.00214 & 0.16\tabularnewline
 \hline 
-c2  & 2.978$*10^{-4}$  & 1.71{*}$10^{-4}$ & 1.74\tabularnewline
+c2  & 2.01$*10^{-4}$  & 1.29{*}$10^{-4}$ & 1.56\tabularnewline
 \hline 
 \end{tabular}
 
