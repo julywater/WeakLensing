@@ -114,23 +114,103 @@ This paper is organized as follows...
 %%  SECTION N: XXX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{XXX}
+\section{method}
 \label{sec:XXX}
+
+
+\subsection{Likelihood Functions}
+If we know the ellipticity distribution of unlensed galaxies based
+on some parasmeters $\alpha$,the likelihood of reduced shear $g$
+and parameter $\alpha$ is like:
+
+\begin{equation}
+L(\vec{g},\alpha|\epsilon_{\ell})=p(\epsilon_{\ell}|\vec{g},\alpha)=P(\epsilon_{0}(\vec{g})|\alpha)*|\frac{\partial\epsilon_{0}}{\partial\epsilon_{\ell}}|
+\end{equation}
+
+
+Note that both $\epsilon_{0}$ and $\epsilon_{\ell}$are complex numbers.So
+$|\frac{\partial\epsilon_{0}}{\partial\epsilon_{\ell}}|$ is the Jacobian
+determinant term.Here the prior distribtuion we use for $\vec{g}$
+is a 2Dflat distribution in the region $|g|<1$.Therefore $prior(\vec{g)}=\begin{cases}
+1 & |\vec{g}|<1\\
+0 & |\vec{g}|>1
+\end{cases}$
+
+The prior of $\alpha$ some how depends on the model we choose for
+intrinsic ellipticity distribution .When we use the step function
+model for P($\epsilon_{0}$),we find that we need to use a prior on
+$\alpha$ .
+\begin{equation}
+Prior(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
+\end{equation}
+
+
+Given the likehood functions and priors we can also calculated the
+marginalized likelihood function.
+\begin{equation}
+p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\alpha)p(\alpha|\vec{g})d\alpha
+\end{equation}
+
+
+Since $p(\alpha)$ does not explicitly depends on $\vec{g}$ .$p(\alpha|\vec{g})$is
+just $Prior(\vec{\alpha}|\xi)$.Therefore,we have marginalized likehood
+\begin{equation}
+p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\alpha)Prior(\vec{\alpha}|\xi)d\alpha
+\end{equation}
+
+
+\subsection{model for P($\epsilon_{0}$)}
+Two flexible models are tested for P($\epsilon_{0}$)
+One is Beta function model and one is step function model.
+While using step function model we use a prior regularzation on $\alpha$ 
+\begin{equation}
+Prior(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
+\end{equation}
+
+
+\subsection{MCMC Sampler}
+
+While making the posterior samples we choose to use the classical Gibbs sampler.
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  SECTION N: XXX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{XXX}
+\section{Result}
 \label{sec:XXX}
+
+\subsection{Posterior samples}
+We show the posterior samples of both g and $\alpha$ ,for both beta function and step function model.
+\subsection{Bias Test}
+We test the systematical bias of our estimator.
+We plot $g_{1}-g_{1}^{true}$ VS $g_{1}^{true}$ ,and put on an error bar which equals standard deviation of 
+marginalized likehood functon $p(Data|g_{1})$ ,and use a linear fit to determin the m,c value and their standard 
+deviations.
+
+\subsection{Accuracy Test}
+We compare the mean square error of our estimator with average and the estimator that could be constructed if the true unlensed
+ellipticity distribution were known.
+We show how the mean square error varies with number of galaxies ,number of patches and so on.
+
+\subsection{Accuracy Test}
+We show some example how our method works when there is an Gaussian noise added on the observed $\epsilon$
+
+\subsection{prefactor $\xi$}
+Discuss about how $\xi$ is tuned ,the danger if $\xi$ is set to be too large or too small. 
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  SECTION N: XXX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{XXX}
+\section{Discussion}
 \label{sec:XXX}
 
 
