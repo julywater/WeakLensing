@@ -117,11 +117,40 @@ This paper is organized as follows...
 \section{method}
 \label{sec:XXX}
 
+\subsection{Likelihood Function}
 
-\subsection{Likelihood Functions}
-If we know the ellipticity distribution of unlensed galaxies based
-on some parasmeters $\alpha$,the likelihood of reduced shear $g$
-and parameter $\alpha$ is like:
+We assume Lensed galaxy ellipticity $\epsilon_{\ell}$ is related
+to the intrinsic galaxy ellipticity $\epsilon_{0}$ in the weak lensing
+regime via
+\begin{equation}
+\epsilon_{\ell}=\frac{\epsilon_{0}+g}{1+g^{*}\epsilon_{0}}
+\end{equation}
+
+
+and it's inverse formula 
+\begin{equation}
+\epsilon_{0}=\frac{\epsilon_{\ell}-g}{1-g^{*}\epsilon_{\ell}}
+\end{equation}
+from Schramm \& Kayser (1995), Seitz \& Schneider (1997), where $\epsilon$
+is represented as a complex variable and g, $g^{*}$ are the reduced
+shear and its complex conjugate, respectively. $\epsilon$ is defined
+in terms of the major and minor axes and orientation a, b, $\phi$,
+respectively, as e = (a − b)/(a + b) exp(2i$\phi$). Due to the isotropic
+of Universe ,we expect $\phi$has a uniform distribution from 0 to
+$\pi$.Then we can expect 
+\begin{equation}
+<\epsilon_{\ell}>=g
+\end{equation}
+
+
+So $<\epsilon_{\ell}>$ can be adopted as an estimator of g.
+
+However in our hierachical Bayesian approach we are able to obtain
+the posterior distribution of g ,starting from the same formulas.
+
+Suppose we know the ellipticity distribution of unlensed galaxies
+based on some parasmeters $\alpha$,the likelihood of reduced shear
+$g$ and parameter $\alpha$ is like:
 
 \begin{equation}
 L(\vec{g},\alpha|\epsilon_{\ell})=p(\epsilon_{\ell}|\vec{g},\alpha)=P(\epsilon_{0}(\vec{g})|\alpha)*|\frac{\partial\epsilon_{0}}{\partial\epsilon_{\ell}}|
@@ -130,8 +159,15 @@ L(\vec{g},\alpha|\epsilon_{\ell})=p(\epsilon_{\ell}|\vec{g},\alpha)=P(\epsilon_{
 
 Note that both $\epsilon_{0}$ and $\epsilon_{\ell}$are complex numbers.So
 $|\frac{\partial\epsilon_{0}}{\partial\epsilon_{\ell}}|$ is the Jacobian
-determinant term.Here the prior distribtuion we use for $\vec{g}$
-is a 2Dflat distribution in the region $|g|<1$.Therefore $prior(\vec{g)}=\begin{cases}
+determinant term,which can be calculated numerically from formula
+(5).
+
+If there is measurement error on $\epsilon_{ob}$,we will have 
+\begin{equation}
+L(\vec{g},\alpha|\epsilon_{ob})=p(\epsilon_{ob}|\vec{g},\alpha)=\int f(\epsilon_{ob}|\epsilon_{\ell})p(\epsilon_{\ell}|\vec{g},\alpha)
+\end{equation}
+Here the prior distribtuion we use for $\vec{g}$ is a 2Dflat distribution
+in the region $|g|<1$.Therefore $prior(\vec{g)}=\begin{cases}
 1 & |\vec{g}|<1\\
 0 & |\vec{g}|>1
 \end{cases}$
@@ -159,20 +195,99 @@ p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\alpha)Prior(\vec{\alp
 \end{equation}
 
 
-\subsection{model for P($\epsilon_{0}$)}
-Two flexible models are tested for P($\epsilon_{0}$)
-One is Beta function model and one is step function model.
-While using step function model we use a prior regularzation on $\alpha$ 
+One thing to note is that the likelihood of g in patch i only depends
+on the shape parameters but not dependent to g in other patch.Therefore,the
+marginalized likelihood of shape parameters has an equation like:
+
+\begin{equation}
+\ell(\alpha|data)=\prod_{i}\ell_{i}(\alpha|data_{i})
+\end{equation}
+
+
+$\ell_{i}(\alpha|data_{i})$ is the marginalized likelihood function
+calculated with data in the ith patch.From this formula we can see
+how better estimation of $\alpha$ will be obtained if we infer more
+sky patches simultaneously. 
+
+
+\subsection{Model for Prior($\epsilon_{0}$)}
+
+The correctness of posterior distribution of g depends on the intrinsic
+ellipticity distribution P($\epsilon_{0}|\alpha$). Due to the limitation
+of human's knowledge we are not able to give an analytical form of
+$P(\epsilon_{0}|\alpha)$.Therefore we proposed an exceedingly flexible
+model for $P(\epsilon_{0}|\alpha)$,which does not requires further
+assumption on $P(\epsilon_{0}|\alpha)$.
+
+We divide the 2-D space r$\in$(0,1) into N bins .The probability
+of each bin is $p_{i}=e^{\alpha_{i}}$ .$\overrightarrow{\alpha}$
+is a N-D parameter vector to be infered,simultaneously with g.
+
+From practice we find that a prior smooth regularzation on $\alpha$
+is needed to obtain a good estimation on shear g.
+
+The prior distribution we used on $\alpha$ is : 
 \begin{equation}
 Prior(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
 \end{equation}
 
 
-\subsection{MCMC Sampler}
+Here $\xi$ is a prefactor need to be tuned .
 
-While making the posterior samples we choose to use the classical Gibbs sampler.
+Meanwhile,in order to show the correctness of our method ,we also
+set up a simulation in which we know the true $P(|\epsilon_{0}||\alpha)$
+is a Beta distribution ,and thus $\alpha$ is the 2-D parameter (p,q)
+of the Beta distribution.We will show the posterior samples using
+both of these two methods in next section. Note that for either model
+we assume P($\epsilon_{0}$) is isotropic.
 
 
+\subsection{Gibbs Sampler}
+
+While making the posterior samples we choose to use the classical
+Gibbs sampler.
+
+In Gibbs sampling ,samples of variable $x_{j}$ is made from the conditional
+probability distribution:$p(x_{j}^{(i)}|x_{1}^{(i)},....,x_{j-1}^{(i)},x_{j+1}^{(i-1)}...,x_{n}^{(i-1)})$
+
+While the conditional distribution of one variable given all others
+is just proportional to the joint distribution
+
+\begin{equation}
+p(x_{j}|x_{1},....,x_{j-1},x_{j+1}...,x_{n})\varpropto p(x_{1},.....,x_{n})
+\end{equation}
+
+
+One thing to note is that the conditional probability of g in ith
+patch only explicitly depends on $\alpha$ ,but not g in other patches.Therefore
+with $\alpha$ fixed ,the posterior distribution of reduced shear
+in ith patch are independent from each other .
+\begin{equation}
+p(\vec{g}_{1}....\vec{g}_{n}|\alpha,Data)=p(\vec{g}_{1}|\alpha,Data_{1})....p(\vec{g}_{n}|\alpha,Data_{n})
+\end{equation}
+Therefore sampling reduced shear g from conditional distribution can
+be reduced to 2D sampling problem,which can be done very quickly.
+
+The total time needed to sample $g$ and $\alpha$ of 64 sky patches
+with 8 galaxies in each patch will only be approximitly 25s on a 2
+GHz CPU.
+
+
+\subsection{Simulations}
+
+The procedure of our simulation is that ,first we generated N{*}NP
+unlensed galaxies' elliprticity from the ``true'' $P(\epsilon_{0})$,and
+asign these galaxies into NP patches equally.So each patch has N galaxies.Second
+we generate NP true reduced shears ,and asign them to each patch,and
+then shear the unlensed galaxies using formula (4) .
+
+Finally we can put on some noise on $\epsilon_{\ell}$ to get the
+observed ellipticity $\epsilon_{ob}$. For simplicity we've only considered
+the situation when P($\epsilon_{ob}|\epsilon_{\ell})$ is a 2D Gaussian.
+
+Use Gibbs sampler and $P(\epsilon_{0}|\alpha)$ mentioned previously,we
+are to sample the posterior distribution of g and $\alpha$ simultaneously
+and effectively.
 
 
 
