@@ -196,7 +196,7 @@ Suppose we know the ellipticity distribution of unlensed galaxies
 based on some parasmeters $\alpha$,then we can write the likelihood of reduced shear and $\alpha$:
 
 \begin{equation}
-L(\vec{g},\alpha|\epsilon_{\ell})=p(\epsilon_{\ell}|\vec{g},\alpha)=P(\epsilon_{0}(\vec{g})|\alpha)*|\frac{\partial\epsilon_{0}}{\partial\epsilon_{\ell}}|
+p(\epsilon_{\ell}|\vec{g},\alpha)=p(\epsilon_{0}(\vec{g})|\alpha)*|\frac{\partial\epsilon_{0}}\,{\partial\epsilon_{\ell}}|
 \end{equation}
 
 
@@ -207,10 +207,10 @@ determinant term,which can be calculated numerically from formula
 
 If there is measurement error on $\epsilon_{ob}$,we will have 
 \begin{equation}
-L(\vec{g},\alpha|\epsilon_{ob})=p(\epsilon_{ob}|\vec{g},\alpha)=\int f(\epsilon_{ob}|\epsilon_{\ell})p(\epsilon_{\ell}|\vec{g},\alpha)
+p(\epsilon_{ob}|\vec{g},\alpha)=\int f(\epsilon_{ob}|\epsilon_{\ell})\,p(\epsilon_{\ell}|\vec{g},\alpha)
 \end{equation}
 Here the prior distribtuion we use for $\vec{g}$ is a 2D flat distribution
-in the region $|g|<1$.Therefore $prior(\vec{g)}=\begin{cases}
+in the region $|g|<1$.Therefore $p(\vec{g)}=\begin{cases}
 1 & |\vec{g}|<1\\
 0 & |\vec{g}|>1
 \end{cases}$
@@ -220,7 +220,7 @@ intrinsic ellipticity distribution .When we use the step function
 model for P($\epsilon_{0}$),which we'll decribe latter.We find that
 we need to use a prior on $\alpha$ .
 \begin{equation}
-Prior(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
+p(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
 \end{equation}
 
 
@@ -232,10 +232,12 @@ p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\alpha)p(\alpha|\vec{g
 
 
 Since $p(\alpha)$ does not explicitly depends on $\vec{g}$ .$p(\alpha|\vec{g})$is
-just $Prior(\vec{\alpha}|\xi)$.Therefore,we have marginalized likehood
+just the pror distribution $p(\vec{\alpha}|\xi)$.Therefore,we have marginalized likehood
 \begin{equation}
-p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\alpha)Prior(\vec{\alpha}|\xi)d\alpha
+p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\alpha)\,p(\vec{\alpha}|\xi)d\alpha
 \end{equation}
+Given that marginalized likelihood function ,in principle we could optimize it  and gives out a max-likelihood estimator 
+for \vec{g} in different patches simultaneously.
 
 
 One thing to note is that the likelihood of g in patch i only depends
@@ -272,7 +274,7 @@ is needed to obtain a good estimation on shear g.
 
 The prior distribution we used on $\alpha$ is : 
 \begin{equation}
-Prior(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
+p(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
 \end{equation}
 
 
