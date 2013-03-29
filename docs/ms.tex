@@ -109,55 +109,48 @@ statements: when you know what your findings are, you can complete them.}
 
 Weak gravitational lensing has become the most potential tool for constraining the cosmological parameters that describe the dark universe (Albrecht et al. 2006; Peacock & Schneider 2006). 
 One application of Weak gravitational lensing is that it can be used to measure the mass profile of single galaxy,galaxy groups and clusters or large scales.
-Cosmic shear is the mild distortion of distant galaxy images due to the
-bending of light by intervening matter.
-Cosmic shear provides one of the most promising methods for constraining the nature of
-dark energy (Albrecht et al. 2006; Peacock&Schneider 2006). 
+Cosmic shear is the mild distortion of distant galaxy images due to the bending of light by intervening matter.
+Cosmic shear provides one of the most promising methods for constraining the nature of dark energy (Albrecht et al. 2006; Peacock&Schneider 2006). 
+In galaxy--galaxy weaklensing  ,tangential shear distortions of background galaxies around foreground
+galaxies, allows direct measurement of the galaxy–DM correlation
 
 
-What is the big problems of weak lensing analysis:
-The magnitude of shear in Weak lensing is typically ~0.01 it's usually 10 times smaller than the intrinsic shape 
+
+
+The distortion in Weak lensing is typically ~ 0.01,or ~0.001 for galaxy-galaxy lensing  it's usually 10 times smaller than the intrinsic shape 
 noise,it's also smaller than the distortion caused be PSF effect which usually has ~0.05 level.
-We have little information about the intrinsic shape distribution futher than it's istropic,the direct observation we can make is mere the distribution
-of lensed ellipticity.And there is an analytical fine model to describe intrinsic shape distribution.
+The main source of uncertainty of tangential shear comes from the intrinsic shape "noise" . We know little knowledge about 
+the distribution of intrinsic ellipticity,exception the assumption that the orientational angle should be isotropic.
+With this assumption,we can use the average of galaxies' ellipticity as an estimator of tangential shear.--However by 
+doing this we loose some information about how the ellipticity are distributed. Simple average point estimator can't 
+use the other reasonable assumption about intrinsic shape distribution --galaxies in different sky patches should have 
+the same shape distibution--which is the result of homogeneous Universe.
 
 
-
-how do we break it down to e measurement, and g inference, and cosmological parameter estimation?
-
-
-
-The measurement of galaxy shapes from images is first step  of weak gravitational lensing analysis , since the observed ellipticities of distant galaxies are
-Used to infer the shear map , which quantify how shape of galaxies are distorted.
-The second step is to infer the shear map from galaxies ellipticity.Usually the estimate of g  involve simple or weighted
-means of measured galaxy ellipticities.
-Finally,we can recover the projected mass profile of galaxies or dark energy by it’s shear map.
-In this paper we set up a simple toy model in which 
-
-what are we studying in this paper (ie, not the whole thing, just going from es to gs).
-In this paper we merely consider the inference of shear map from galaxies shape.
-We set up an simple toy model in which we have the observed ellipticity as data,and the only measurement error we consider 
-is a Gaussian noise add on the true lensed ellipticity.We suppose there is a uniform shear acting on one sky patch,
+The typical procedure of weak lensing analysis usually include ellipticity measurement,shear inference,mass profile reconstruction.
+The measurement of galaxy shapes  is  the first step  of weak gravitational lensing analysis,since it's the direct observable
+that relates with tangential shear.However in this paper we only concern about how to infere shear from galaxy ellipticity
+in a hierachical way.Therefore in our simulation we set up an simple toy model in which we have the observed ellipticity as data,and the only measurement error we consider 
+is a Gaussian noise add on the true lensed ellipticity.We suppose there is a uniform shear acting on one all the galaxies in sky patch,
 
 
+Our approach is to use an exceedingly flexiable model for intrinsic shape distribution,and assumes all the galaxies in different
+patches abeys such an distribution.Then we can calculate the joint likelihood of both shpape distribution parameters and shear in differ
+With a classical Gibbs MCMC sampler we are able to sample their posteior distriibution.After marginalizing the shape parameters, we can
+obtain the posterior distribution of shear,which we are interested in.
 
 
-Our approach is to use an exceedingly model for intrinsic shape distribution,and use MCMC sampling to 
-gives out the whole likelihood function of shear in many sky patches and their common shape parameters simultaneously.
-
-We can use the credit interval of posterior samples as the uncertainty of estimate
-, which can be used as statistical weights.It tells us how much information about shear can we obtain from observed data.
-
-By doing this we use the information that galaxies in different sky patch should have the same intrinsic shape distribution.
-
-How it's related to galaxy -galaxy lensing
-In galaxy - galaxy lensing what people usually do is stack many lensing signals together and get the "average"
+In galaxy--galaxy lensing ,since the distortion is so weak,what people usually do is stack many lensing signals together and get the "average"
 shear map,and then infers the mean mass profile of galaxy or galaxy cluster.
-However with HB method we can calculate the posterior distribution of mass profile of each lens and propagate all the uncertainty
-from to the posterior distributions.
+However with HB method we can avoid this brute averaging ,instead we can get the posterior distribution of mass profile for 
+each lensing system - even though it has very arge uncertainty- we can calculate the statistical property like galaxy-mass
+correlation function via this posterior distribution.
 
 
-This paper is orgnized as following: First we 
+This paper is orgnized as following: In section 2 we introduce the weak lensing formulas and the likelihood function .Then we 
+describe two flexible models for the intrinsic shape distribution. In section 3 we show the result of the MCMC sampling
+,and check the bias and variance of sample mean and compare with that of the simple average method.In Section 4 we discussed
+
 
 
 
