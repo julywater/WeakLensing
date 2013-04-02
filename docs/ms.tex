@@ -86,85 +86,112 @@ propagate uncertainty without introducing additional catalog-generated variance.
 %%  SECTION 1: INTRODUCTION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
 \section{Introduction}
+
 \label{sec:intro}
 
-\flag{Yike}{Plan the sections of your paper, and write very brief notes on
-what you want to say in each of them. You will find it helpful to divide
-them into sub-sections, and even paragraphs. You may also want to put in
-placeholder figures and tables; if you do, make sure to write the captions of
-them. The itemized conclusions should be partial answers to a corresponding
-list of questions in the introduction. You can write these now, as incomplete
-statements: when you know what your findings are, you can complete them.}
+\flag{Yike}{Plan the sections of your paper, and write very brief
+notes on what you want to say in each of them. You will find it helpful
+to divide them into sub-sections, and even paragraphs. You may also
+want to put in placeholder figures and tables; if you do, make sure
+to write the captions of them. The itemized conclusions should be
+partial answers to a corresponding list of questions in the introduction.
+You can write these now, as incomplete statements: when you know what
+your findings are, you can complete them.}
 
 % WL as cosmological and astrophysical probe. 
+
 
 % Information is scarce. 
 % Expensive, high precision future. Motivation.
 
+
 % This paper: toy problem, exploring one aspect of analysis.
+
 
 % History of shear estimation, and treatment of Pr(e).
 
 
-Weak gravitational lensing has become the most potential tool to explore the dark universe. 
-One application of Weak gravitational lensing is that it can be used to measure the mass profile of single galaxy,galaxy groups and clusters or large scales.
-Cosmic shear is the mild distortion of distant galaxy images due to the bending of light by intervening matter.It provides one of the most promising methods for constraining the nature of dark energy (Albrecht et al. 2006; Peacock&Schneider 2006). 
-While in galaxy--galaxy weaklensing ,tangential shear distortions of background galaxies around foreground galaxies, allows direct measurement of the galaxy–DM correlation
+Weak gravitational lensing has become the most potential tool to explore
+the dark universe. One application of Weak gravitational lensing is
+that it can be used to measure the mass profile of single galaxy,galaxy
+groups and clusters or large scales. Cosmic shear is the mild distortion
+of distant galaxy images due to the bending of light by intervening
+matter.It provides one of the most promising methods for constraining
+the nature of dark energy (Albrecht et al. 2006; Peacock\&Schneider
+2006). While in galaxy--galaxy weaklensing ,tangential shear distortions
+of background galaxies around foreground galaxies, allows direct measurement
+of the galaxy-DM correlation
 
-
-
-
-The distortion in Weak lensing is typically ~ 0.01,or ~0.001 for galaxy-galaxy lensing  it's usually more than 10 times smaller than the intrinsic shape 
-noise,it's also smaller than the distortion caused be PSF effect which usually has ~0.05 level.
-The main source of uncertainty of tangential shear comes from the intrinsic shape "noise" . We know little knowledge about 
-the distribution of intrinsic ellipticity,exception the assumption that the orientational angle should be isotropic.
-With this assumption,we can use the average of galaxies' ellipticity as an estimator of tangential shear.--However by 
-doing this we lose some information about how the ellipticity are distributed. Simple average point estimator can't 
-use the other reasonable assumption about intrinsic shape distribution --galaxies in different sky patches should have 
+The distortion in Weak lensing is typically ~ 0.01,or ~0.001 for
+galaxy-galaxy lensing it's usually more than 10 times smaller than
+the intrinsic shape noise,it's also smaller than the distortion caused
+be PSF effect which usually has ~0.05 level. For shear measurement
+the main source of uncertainty comes from the intrinsic shape noise
+. We know little knowledge about the distribution of intrinsic ellipticity,exception
+the assumption that the orientational angle should be isotropic. With
+this assumption,we can use the average of galaxies' ellipticity as
+an estimator of tangential shear.--However by doing this we lose some
+information about how the ellipticity are distributed. Simple average
+point estimator can't use the other reasonable assumption about intrinsic
+shape distribution --galaxies in different sky patches should have
 the same shape distibution--which is the result of homogeneous Universe.
 
+The typical procedure of weak lensing analysis usually include ellipticity
+measurement,shear inference,mass profile reconstruction. The measurement
+of galaxy shapes is the first step of weak gravitational lensing analysis,since
+it's the direct observable that relates with tangential shear.However
+in this paper we only concern about how to infere shear from galaxy
+ellipticity in a hierachical way.Therefore in our simulation we set
+up a simple toy model in which we have the observed ellipticity as
+data,and the only measurement error we consider is a Gaussian noise
+add on the true lensed ellipticity.We suppose there is a uniform shear
+acting on one all the galaxies in sky patch,
 
-The typical procedure of weak lensing analysis usually include ellipticity measurement,shear inference,mass profile reconstruction.
-The measurement of galaxy shapes  is  the first step  of weak gravitational lensing analysis,since it's the direct observable
-that relates with tangential shear.However in this paper we only concern about how to infere shear from galaxy ellipticity
-in a hierachical way.Therefore in our simulation we set up a simple toy model in which we have the observed ellipticity as data,and the only measurement error we consider 
-is a Gaussian noise add on the true lensed ellipticity.We suppose there is a uniform shear acting on one all the galaxies in sky patch,
+Our approach is to use an exceedingly flexible model for intrinsic
+shape distribution,and assumes all the galaxies in different patches
+abeys such a distribution.Then we can calculate the joint likelihood
+of shpape distribution parameters and shear in differ shy patches.With
+a classical Gibbs MCMC sampler we are able to sample their posteior
+distriibution.After marginalizing the shape parameters, we can obtain
+the posterior distribution of shear,which we are interested in.This
+approach allows us use the information maximumly without introducing
+in any wrong assumptions on intrinsic shape distribution.
 
+In galaxy--galaxy lensing ,since the distortion is so weak,what people
+usually do is stack many lensing signals together and get the mean
+shear map,and then infers the mean mass profile of galaxy or galaxy
+cluster. However with HB method we can avoid this brute averaging
+,instead we can get the posterior distribution of mass profile for
+each lensing system - even though it has very large uncertainty- we
+can calculate the statistical property like galaxy-mass correlation
+function via this posterior distribution.
 
-Our approach is to use an exceedingly flexible model for intrinsic shape distribution,and assumes all the galaxies in different
-patches abeys such a distribution.Then we can calculate the joint likelihood of  shpape distribution parameters and shear in differ
-shy patches.With a classical Gibbs MCMC sampler we are able to sample their posteior distriibution.After marginalizing the shape parameters, we can
-obtain the posterior distribution of shear,which we are interested in.This approach allows us use the information maximumly
-without introducing in any wrong assumptions on intrinsic shape distribution.
-
-
-In galaxy--galaxy lensing ,since the distortion is so weak,what people usually do is stack many lensing signals together and get the "average"
-shear map,and then infers the mean mass profile of galaxy or galaxy cluster.
-However with HB method we can avoid this brute averaging ,instead we can get the posterior distribution of mass profile for 
-each lensing system - even though it has very large uncertainty- we can calculate the statistical property like galaxy-mass
-correlation function via this posterior distribution.
-
-
-This paper is orgnized as following: In section 2 we introduce the weak lensing formulas and the likelihood function .Then we 
-describe two flexible models for the intrinsic shape distribution. In section 3 we show the result of the MCMC sampling
-,and check the bias and variance of sample mean and compare with that of the simple average method.In Section 4 we discussed
-
-
-
+This paper is orgnized as following: In section 2 we introduce the
+weak lensing formulas and the likelihood function .Then we describe
+two flexible models for the intrinsic shape distribution. In section
+3 we show the result of the MCMC sampling ,and check the bias and
+variance of sample mean and compare with that of the simple average
+method.In Section 4 we discussed
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  SECTION N: XXX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
 \section{method}
+
 \label{sec:XXX}
+
 
 \subsection{Likelihood Functions}
 
 We assume Lensed galaxy ellipticity $\epsilon_{\ell}$ is related
 to the intrinsic galaxy ellipticity $\epsilon_{0}$ in the weak lensing
-regime via
+regime via 
 \begin{equation}
 \epsilon_{\ell}=\frac{\epsilon_{0}+g}{1+g^{*}\epsilon_{0}}
 \end{equation}
@@ -178,9 +205,9 @@ from Schramm \& Kayser (1995), Seitz \& Schneider (1997), where $\epsilon$
 is represented as a complex variable and g, $g^{*}$ are the reduced
 shear and its complex conjugate, respectively. $\epsilon$ is defined
 in terms of the major and minor axes and orientation a, b, $\phi$,
-respectively, as $\epsilon$ = (a − b)/(a + b) exp(2i$\phi$). Due to the isotropicity
-of Universe ,we expect $\phi$ has a uniform distribution from 0 to
-$\pi$.Then we can expect 
+respectively, as $\epsilon$ = (a - b)/(a + b) exp(2i$\phi$). Due
+to the isotropicity of Universe ,we expect $\phi$ has a uniform distribution
+from 0 to $\pi$.Then we can expect 
 \begin{equation}
 <\epsilon_{\ell}>=g
 \end{equation}
@@ -189,14 +216,16 @@ $\pi$.Then we can expect
 Therefore $<\epsilon_{\ell}>$ can be adopted as an estimator of g.
 
 However in our hierachical Bayesian approach we are able to obtain
-the posterior distribution of g ,based on the assumption  $\phi$ has a uniform distribution and galaxies in different
-sky patches have the same intrinsic shape distribution.
+the posterior distribution of g ,based on the assumption $\phi$ has
+a uniform distribution and galaxies in different sky patches have
+the same intrinsic shape distribution.
 
 Suppose we know the ellipticity distribution of unlensed galaxies
-based on some parasmeters $\alpha$,then we can write the likelihood of reduced shear and $\alpha$:
+based on some parasmeters $\alpha$,then we can write the likelihood
+of reduced shear and $\alpha$:
 
 \begin{equation}
-p(\epsilon_{\ell}|\vec{g},\alpha)=p(\epsilon_{0}(\vec{g})|\alpha)*|\frac{\partial\epsilon_{0}}\,{\partial\epsilon_{\ell}}|
+p(\epsilon_{\ell}|\vec{g},\alpha)=p(\epsilon_{0}(\vec{g})|\alpha)*|\frac{\partial\epsilon_{0}}{\,}{\partial\epsilon_{\ell}}|
 \end{equation}
 
 
@@ -207,7 +236,7 @@ determinant term,which can be calculated numerically from formula
 
 If there is measurement error on $\epsilon_{ob}$,we will have 
 \begin{equation}
-p(\epsilon_{ob}|\vec{g},\alpha)=\int f(\epsilon_{ob}|\epsilon_{\ell})\,p(\epsilon_{\ell}|\vec{g},\alpha)
+p(\epsilon_{ob}|\vec{g},\alpha)=\int f(\epsilon_{ob}|\epsilon_{\ell})\, p(\epsilon_{\ell}|\vec{g},\alpha)
 \end{equation}
 Here the prior distribtuion we use for $\vec{g}$ is a 2D flat distribution
 in the region $|g|<1$.Therefore $p(\vec{g)}=\begin{cases}
@@ -218,27 +247,28 @@ in the region $|g|<1$.Therefore $p(\vec{g)}=\begin{cases}
 The prior of $\alpha$ some how depends on the model we choose for
 intrinsic ellipticity distribution .When we use the step function
 model for P($\epsilon_{0}$),which we'll decribe latter.We find that
-we need to use a prior on $\alpha$ .
+we need to use a prior on $\alpha$ . 
 \begin{equation}
 p(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
 \end{equation}
 
 
 Given the likehood functions and priors we can also calculated the
-marginalized likelihood function.
+marginalized likelihood function. 
 \begin{equation}
 p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\alpha)p(\alpha|\vec{g})d\alpha
 \end{equation}
 
 
 Since $p(\alpha)$ does not explicitly depends on $\vec{g}$ .$p(\alpha|\vec{g})$is
-just the pror distribution $p(\vec{\alpha}|\xi)$.Therefore,we have marginalized likehood
+just the pror distribution $p(\vec{\alpha}|\xi)$.Therefore,we have
+marginalized likehood 
 \begin{equation}
-p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\alpha)\,p(\vec{\alpha}|\xi)d\alpha
+p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\alpha)\, p(\vec{\alpha}|\xi)d\alpha
 \end{equation}
-Given that marginalized likelihood function ,in principle we could optimize it  and gives out a max-likelihood estimator 
-for \vec{g} in different patches simultaneously.
-
+Given that marginalized likelihood function ,in principle we could
+optimize it and gives out a max-likelihood estimator for $\vec{g}$
+in different patches simultaneously.
 
 One thing to note is that the likelihood of g in patch i only depends
 on the shape parameters but not dependent to g in other patch.Therefore,the
@@ -252,8 +282,8 @@ marginalized likelihood of shape parameters has an equation like:
 $\ell_{i}(\alpha|data_{i})$ is the marginalized likelihood function
 calculated with data in the ith patch.From this formula we can see
 how better estimation of $\alpha$ will be obtained if we infer more
-sky patches simultaneously. With better knowledge on $\alpha$ we can
-in turn have better estimates on reduced shear g.
+sky patches simultaneously. With better knowledge on $\alpha$ we
+can in turn have better estimates on reduced shear g.
 
 
 \subsection{Model for Prior($\epsilon_{0}$)}
@@ -290,8 +320,8 @@ we assume P($\epsilon_{0}$) is isotropic.
 
 \subsection{Gibbs Sampler}
 
-While making the posterior samples $p(\g,\alpha|Data)$ we choose to use the classical
-Gibbs sampler.
+While making the posterior samples $p(g,\alpha|Data)$ we choose to
+use the classical Gibbs sampler.
 
 In Gibbs sampling ,samples of variable $x_{j}$ is made from the conditional
 probability distribution:$p(x_{j}^{(i)}|x_{1}^{(i)},....,x_{j-1}^{(i)},x_{j+1}^{(i-1)}...,x_{n}^{(i-1)})$
@@ -307,7 +337,7 @@ p(x_{j}|x_{1},....,x_{j-1},x_{j+1}...,x_{n})\varpropto p(x_{1},.....,x_{n})
 One thing to note is that the conditional probability of g in ith
 patch only explicitly depends on $\alpha$ ,but not g in other patches.Therefore
 with $\alpha$ fixed ,the posterior distribution of reduced shear
-in ith patch are independent from each other .
+in ith patch are independent from each other . 
 \begin{equation}
 p(\vec{g}_{1}....\vec{g}_{n}|\alpha,Data)=p(\vec{g}_{1}|\alpha,Data_{1})....p(\vec{g}_{n}|\alpha,Data_{n})
 \end{equation}
@@ -335,91 +365,113 @@ Use Gibbs sampler and $P(\epsilon_{0}|\alpha)$ mentioned previously,we
 are to sample the posterior distribution of g and $\alpha$ simultaneously
 and effectively.
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  SECTION N: XXX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 \section{Result}
+
 \label{sec:XXX}
 
+
 \subsection{Posterior samples}
-We show the posterior samples of both g and $\alpha$ ,for both beta function and step function model.
+
+We show the posterior samples of both g and $\alpha$ ,for both beta
+function and step function model. 
+
+
 \subsection{Bias Test}
-We test the systematical bias of our estimator.(Here the estimator is the max-marginalized likelihood estimator?)
-We plot $g_{1}-g_{1}^{true}$ VS $g_{1}^{true}$ ,and put on an error bar which equals standard deviation of 
-marginalized likehood functon $p(Data|g_{1})$ ,and use a linear fit to determin the m,c value and their standard 
-deviations.
+
+We test the systematical bias of our estimator.(Here the estimator
+is the max-marginalized likelihood estimator?) We plot $g_{1}-g_{1}^{true}$
+VS $g_{1}^{true}$ ,and put on an error bar which equals standard
+deviation of marginalized likehood functon $p(Data|g_{1})$ ,and use
+a linear fit to determin the m,c value and their standard deviations.
+
 
 \subsection{Accuracy Test}
-We compare the mean square error of our estimator with average and the estimator that could be constructed if the true unlensed
-ellipticity distribution were known.
-We show how the mean square error varies with number of galaxies ,number of patches and so on.
+
+We compare the mean square error of our estimator with average and
+the estimator that could be constructed if the true unlensed ellipticity
+distribution were known. We show how the mean square error varies
+with number of galaxies ,number of patches and so on.
+
 
 \subsection{Measurement Error}
-We show some example how our method works when there is an Gaussian noise added on the observed $\epsilon$
+
+We show some example how our method works when there is an Gaussian
+noise added on the observed $\epsilon$
+
 
 \subsection{prefactor $\xi$}
-Discuss about how $\xi$ is tuned ,the danger if $\xi$ is set to be too large or too small. 
 
-
-
-
+Discuss about how $\xi$ is tuned ,the danger if $\xi$ is set to
+be too large or too small.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  SECTION N: XXX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
 \section{Discussion}
-\label{sec:XXX}
-In weak lensing survey,one way to obtain high S/N ratio is to stack large number of lensing signal together,and 
-calculate the mean shear map of all these lensing systems.However simply to stack all the lensing signals would not be the
-optimal way because of the amount of information we can obtain from each lensing system can be very different.
-The Bayesian inference approach we proposed allows a natural way to optimally include all the data.In stead of stacking what we need to do
-is to propogate the likelihood of the shear map of each lensing system. The statistical property of all the lensing systems
-like the galaxy-mass ,shear-shar correlation function ,in principle can be calculated from these likelihood functions.
+
+\label{sec:XXX} In weak lensing survey,one way to obtain high S/N
+ratio is to stack large number of lensing signal together,and calculate
+the mean shear map of all these lensing systems.However simply to
+stack all the lensing signals would not be the optimal way because
+of the amount of information we can obtain from each lensing system
+can be very different. The Bayesian inference approach we proposed
+allows a natural way to optimally include all the data.In stead of
+stacking what we need to do is to propogate the likelihood of the
+shear map of each lensing system. The statistical property of all
+the lensing systems like the galaxy-mass ,shear-shar correlation function
+,in principle can be calculated from these likelihood functions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  SECTION X: DISCUSSION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Discussion}
-\label{sec:discuss}
 
+
+\section{Discussion}
+
+\label{sec:discuss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  SECTION X: CONCLUSIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
 \section{Conclusions}
+
 \label{sec:conclusions}
 
-In summary,We have presented a conceptually simple method for estimating tangential shear ,
-with carefully calculated uncertainty estimates. This method is intrinsically cope with high noise levels on the input data and naturally
-allows bad fit to be identified from the residuals map.
-We have proposed an exceeding flexible model for intrinsic shape distribution allows us to obtain the correct posterior distributions,
-while avoiding making unsupported assumptions.The Gibbs sampler allows us to sample the posterior distribution of shear in 
-large number of sky patches simultaneously and efficiently.
-
+In summary,We have presented a conceptually simple method for estimating
+tangential shear , with carefully calculated uncertainty estimates.
+This method is intrinsically cope with high noise levels on the input
+data and naturally allows bad fit to be identified from the residuals
+map. We have proposed an exceeding flexible model for intrinsic shape
+distribution allows us to obtain the correct posterior distributions,
+while avoiding making unsupported assumptions.The Gibbs sampler allows
+us to sample the posterior distribution of shear in large number of
+sky patches simultaneously and efficiently.
 \begin{itemize}
-
 \item We ...
-
 \item The ...
-
 \item The ...
-
 \end{itemize}
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  ACKNOWLEDGMENTS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
 \section*{Acknowledgments}
- 
+
 We thank XXX for useful discussions and suggestions.
 
 \input{acknowledgments.tex}
@@ -438,20 +490,26 @@ We thank XXX for useful discussions and suggestions.
 %%  REFERENCES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 % MNRAS does not use bibtex, input .bbl file instead. 
 % Generate this in the makefile using bubble script in scriptutils:
 
+
 %   bubble -f PS1QLS-survey.tex references.bib 
 
-\bibliographystyle{apj}
+
+ \bibliographystyle{apj}
 \bibliography{references}
-%\input{PS1QLS-survey.bbl}
+ %\input{PS1QLS-survey.bbl}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\label{lastpage}
-\bsp
+
+\label{lastpage} \bsp
 
 \end{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
