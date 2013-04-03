@@ -144,9 +144,9 @@ A typical procedure of weak lensing analysis  includes ellipticity
 measurement,shear inference and mass profile reconstruction. The measurement
 of galaxy shapes is the first step of weak gravitational lensing analysis,since
 it's the direct observable that relates with tangential shear.However
-in this paper we only concern about how to infere shear from galaxy
-ellipticity in a hierachical way.Therefore in our simulation we set
-up a simple toy model in which we have the observed ellipticity as
+in this paper we only concern about how to infer shear from galaxy
+ellipticity in a hierachical way.Therefore in our simulation we merely
+set up a simple toy model in which we have the observed ellipticity as
 data,and the only measurement error we consider is a Gaussian noise
 added on the lensed galaxy ellipticity.We also suppose there is a uniform shear
 acting on one all the galaxies in sky patch,
@@ -154,12 +154,12 @@ acting on one all the galaxies in sky patch,
 Our approach is to use an exceedingly flexible model for intrinsic
 shape distribution,and assumes all the galaxies in different patches
 abeys such a distribution.Then we can calculate the joint likelihood
-of shpape distribution parameters and shear in differ shy patches.With
+of shpape distribution parameters and shears in different sky patches.With
 a classical Gibbs MCMC sampler we are able to sample their posteior
 distriibution.After marginalizing the shape parameters, we can obtain
 the posterior distribution of shear,which we are interested in.This
 approach allows us use the information maximumly without introducing
-in any wrong assumptions on intrinsic shape distribution.
+in any wrong assumption on intrinsic shape distribution.
 
 In galaxy--galaxy lensing ,since the distortion is so weak,what people
 usually do is stack many lensing signals together and get the mean
