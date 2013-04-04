@@ -448,8 +448,28 @@ noise added on the observed $\epsilon$
 
 \subsection{prefactor $\xi$}
 
-Discuss about how $\xi$ is tuned ,the danger if $\xi$ is set to
-be too large or too small.
+One limitation of the step function model is that it needs to be \textit{regularized};
+this is achieved by assigning a prior PDF for the step heights $\vec{\alpha}$.
+We use the form $Prior(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})$
+when inferring the P($\epsilon$) and $g$. The choice of this functional
+form corresponds to the assumption that the true P($\epsilon$) is
+smooth, which seems fairly natural. This function has a hyperparameter,
+$\xi$, that needs to be set somehow. If $\xi$ is too small, the
+inferred P($\epsilon$) will be too noisy, and the accuracy of the
+$g$ inference will decrease. Likewise, choosing an $\xi$ that is
+too large, the inferred P($\epsilon$) will be too smooth, and the
+data will be under-fitted. In principle one could infer $\xi$ form
+the data at hand, but in practice we find that we further more need some
+prior regularizer on $\xi$ to obtain correct inference.Therefore in this paper 
+we just tuned $\xi$ empirically .From various trials, We find
+that $\xi$ should be proportional to the mean data number density and can
+be approximated by the following empirical formula: 
+\begin{equation}
+\xi=N<\rho(|\epsilon|)>/256*\frac{Nbin}{10}
+\end{equation}
+Here $<\rho|\epsilon|>=\int\rho(|\epsilon|)^{2}d(|\epsilon|)$ corresponds
+to the average of data number density,and Nbin is the number of bins used 
+in step function model. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  SECTION N: XXX
