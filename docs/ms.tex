@@ -403,12 +403,30 @@ sub section.
 
 
 \subsection{Bias Test}
+In this section,we measured the levels of possible systemmatical
+bias of this Hierachical inference method.
+Following Heymans et al. (2006), we quantify the systematic bias in
+in terms of the multiplicative error m and additive error c on the
+true shear $g^{true}$ 
+\begin{equation}
+\hat{g_{i}}-g_{i}^{true}=m_{i}g_{i}^{true}+c_{i}
+\end{equation}
 
-We test the systematical bias of our estimator.(Here the estimator
-is the max-marginalized likelihood estimator?) We plot $g_{1}-g_{1}^{true}$
-VS $g_{1}^{true}$ ,and put on an error bar which equals standard
-deviation of marginalized likehood functon $p(Data|g_{1})$ ,and use
-a linear fit to determin the m,c value and their standard deviations.
+
+The accuracy of Weak Lensing survey depends on both galaxy shape measurement
+and shear inference .In this paper our main concern is how to infere
+shear in a HB method instead off traditional averaging method and
+it does not involve the shape measurement part .Therefore we assume
+we have perfect galaxies ellipticity measurement,and all the possible
+inaccuracy is due to this HB shear inference method.
+
+We calculated the average of $g^{estimated}-g^{true}$ of 10,000 data
+sets as described above.Each data set has 64 patches and 8{*}64 galaxies,and
+the true P($\epsilon$) is Beta(2.8,2.8) .For both Beta function model
+and step funtion model we then determin the best fitted parameters
+m and c of fomula (15).Figure 9 shows an example of step funtion model
+with prior prefator $\xi=3$.The results of the systematical bias
+analysis are tabulated in table 1.
 
 
 \subsection{Accuracy Test}
