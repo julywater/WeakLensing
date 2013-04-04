@@ -441,9 +441,19 @@ with number of galaxies ,number of patches and so on.
 
 
 \subsection{Measurement Error}
+In this section we  discuss how the shape measurement error will
+affect the variance and bias of this Hierarchy Bayesian method.As
+mentioned before ,we only considers the catalog-level problem of how to combine galaxy ellipticity
+measurements.Therefore we assume the likelihood of true lensed ellipticity $p(\epsilon_{ob}|\epsilon_{\ell})
+is a 2D Gaussian with sigma equals 0.05 and mean equals true lensed ellipticity.
 
-We show some example how our method works when there is an Gaussian
-noise added on the observed $\epsilon$
+
+
+Therefore the likelihood of $g$ and $\alpha$ becomes
+\begin{equation}
+L(g,\alpha|\epsilon_{ob})=P(\epsilon_{ob}|g,\alpha)=\intop f(\epsilon_{ob}|\epsilon_{\ell})P(\epsilon_{\ell}|g,\alpha)d\epsilon_{\ell}
+\end{equation}
+
 
 
 \subsection{prefactor $\xi$}
