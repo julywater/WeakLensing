@@ -404,7 +404,11 @@ sub section.
 
 \subsection{Bias Test}
 In this section,we measured the levels of possible systemmatical
-bias of this Hierachical inference method.
+bias of this Hierachical inference method.In principle given the correct model and prior ,
+the hierchical Bayesian inference method would have no bias,if propagate the whole likelihood function.
+However,in practical,the bias may be introduced by the model we use for the intrinsic shape distribution,
+and the prior regularizer of the prefactor $\xi$ as well as the Gaussian approximation we did for the likelihood
+function of $\vec{g}$ .Therefore a bias test is necessary to identify how much bias there is. 
 Following Heymans et al. (2006), we quantify the systematic bias in
 in terms of the multiplicative error m and additive error c on the
 true shear $g^{true}$ 
