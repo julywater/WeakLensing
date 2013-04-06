@@ -333,11 +333,10 @@ use the classical Gibbs sampler.
 In Gibbs sampling ,samples of variable $x_{j}$ is made from the conditional
 probability distribution:$p(x_{j}^{(i)}|x_{1}^{(i)},....,x_{j-1}^{(i)},x_{j+1}^{(i-1)}...,x_{n}^{(i-1)})$
 
-While the conditional distribution of one variable given all others
-is just proportional to the joint distribution
+The conditional probability distribution of one variable given all the other variables are proportional to their joint probability distribution
 
 \begin{equation}
-p(x_{j}|x_{1},....,x_{j-1},x_{j+1}...,x_{n})\varpropto p(x_{1},.....,x_{n})
+p(x_{j}|x_{1},....,x_{j-1},x_{j+1}...,x_{n})\propto p(x_{1},.....,x_{n})
 \end{equation}
 
 
