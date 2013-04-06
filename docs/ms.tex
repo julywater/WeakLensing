@@ -248,10 +248,8 @@ If there is measurement error on $\epsilon_{ob}$,we will have
 p(\epsilon_{ob}|\vec{g},\alpha)=\int f(\epsilon_{ob}|\epsilon_{\ell})\, p(\epsilon_{\ell}|\vec{g},\alpha)
 \end{equation}
 Here the prior distribtuion we use for $\vec{g}$ is a 2D flat distribution
-in the region $|g|<1$.Therefore $p(\vec{g)}=\begin{cases}
-1 & |\vec{g}|<1\\
-0 & |\vec{g}|>1
-\end{cases}$
+in the region $|\vec{g}|<1$.Therefore $p(\vec{g)}=1$ if $|\vec{g}|<1$
+and $p(\vec{g})=0$ if $|\vec{g}|>1$.
 
 The prior of $\alpha$ some how depends on the model we choose for
 intrinsic ellipticity distribution. When we use the step function
