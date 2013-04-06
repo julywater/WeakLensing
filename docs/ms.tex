@@ -263,7 +263,7 @@ p(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
 Given the likehood functions and priors we can also calculated the
 marginalized likelihood function. 
 \begin{equation}
-p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\alpha)p(\alpha|\vec{g})d\alpha
+p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\vec{\alpha})\,p(\vec{\alpha}|\vec{g})\,d\vec{\alpha}
 \end{equation}
 
 
