@@ -261,7 +261,7 @@ p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\vec{\alpha})\,p(\vec{
 
 
 Since $p(\alpha)$ does not explicitly depends on $\vec{g}$ .$p(\alpha|\vec{g})$is
-just the pror distribution $p(\vec{\alpha}|\xi)$. Therefore, we have
+just the prior distribution $p(\vec{\alpha}|\xi)$. Therefore, we have
 marginalized likehood 
 \begin{equation}
 p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\vec{\alpha})\, p(\vec{\alpha}|\xi)\,d\vec{\alpha}
@@ -271,8 +271,8 @@ optimize it and gives out a max-likelihood estimator for $\vec{g}$
 in different patches simultaneously.
 
 One thing to note is that the likelihood of g in patch i only depends
-on the shape parameters but not dependent to g in other patch. Therefore, the
-marginalized likelihood of shape parameters has an equation like:
+on the shape parameters but not dependent to shear in other patches. Therefore, the
+marginalized likelihood of shape parameters is :
 
 \begin{equation}
 \ell(\alpha|data)=\prod_{i}\ell_{i}(\alpha|data_{i})
@@ -280,7 +280,7 @@ marginalized likelihood of shape parameters has an equation like:
 
 
 $\ell_{i}(\alpha|data_{i})$ is the marginalized likelihood function
-calculated with data in the ith patch.From this formula we can see
+calculated with data in the ith patch. From this formula we can see
 how better estimation of $\alpha$ will be obtained if we infer more
 sky patches simultaneously. With better knowledge on $\alpha$ we
 can in turn have better estimates on reduced shear g.
@@ -291,11 +291,11 @@ can in turn have better estimates on reduced shear g.
 The correctness of posterior distribution of g depends on the intrinsic
 ellipticity distribution P($\epsilon_{0}|\alpha$). Due to the limitation
 of human's knowledge we are not able to give an analytical form of
-$P(\epsilon_{0}|\alpha)$.Therefore we proposed an exceedingly flexible
+$P(\epsilon_{0}|\alpha)$. Therefore we proposed an exceedingly flexible
 model for $P(\epsilon_{0}|\alpha)$, which does not requires further
 assumption on $P(\epsilon_{0}|\alpha)$.
 
-We divide the 2-D space r$\in$(0,1) into N bins .The probability
+We divide the 2-D space r $\in$(0,1) into N bins. The probability
 of each bin is $p_{i}=e^{\alpha_{i}}$. $\overrightarrow{\alpha}$
 is a N-D parameter vector to be infered, simultaneously with g.
 
@@ -310,7 +310,7 @@ p(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
 
 Here $\xi$ is a prefactor need to be tuned.
 
-Meanwhile,in order to show the correctness of our method, we also
+Meanwhile, in order to show the correctness of our method, we also
 set up a simulation in which we know the true $P(|\epsilon_{0}||\alpha)$
 is a Beta distribution, and thus $\alpha$ is the 2-D parameter (p,q)
 of the Beta distribution. We will show the posterior samples using
@@ -335,7 +335,7 @@ p(x_{j}|x_{1},....,x_{j-1},x_{j+1}...,x_{n})\propto p(x_{1},.....,x_{n})
 
 One thing to note is that the conditional probability of g in ith
 patch only explicitly depends on $\alpha$, but not g in other patches. Therefore
-with $\alpha$ fixed ,the posterior distribution of reduced shear
+with $\alpha$ fixed, the posterior distribution of reduced shear
 in ith patch are independent from each other. 
 \begin{equation}
 p(\vec{g}_{1}....\vec{g}_{n}|\alpha,Data)=p(\vec{g}_{1}|\alpha,Data_{1})....p(\vec{g}_{n}|\alpha,Data_{n})
@@ -351,16 +351,16 @@ GHz CPU.
 \subsection{Simulations}
 
 The procedure of our simulation is that, first we generated N{*}NP
-unlensed galaxies' elliprticity from the ``true'' $P(\epsilon_{0})$,and
-asign these galaxies into NP patches equally. So each patch has N galaxies.Second
-we generate NP true reduced shears, and asign them to each patch,and
+unlensed galaxies' elliprticity from the ``true'' $P(\epsilon_{0})$, and
+asign these galaxies into NP patches equally. So each patch has N galaxies. Second
+we generate NP true reduced shears, and asign them to each patch, and
 then shear the unlensed galaxies using formula (4) .
 
 Finally we can put on some noise on $\epsilon_{\ell}$ to get the
 observed ellipticity $\epsilon_{ob}$. For simplicity we've only considered
 the situation when P($\epsilon_{ob}|\epsilon_{\ell})$ is a 2D Gaussian.
 
-Use Gibbs sampler and $P(\epsilon_{0}|\alpha)$ mentioned previously,we
+Use Gibbs sampler and $P(\epsilon_{0}|\alpha)$ mentioned previously, we
 are to sample the posterior distribution of g and $\alpha$ simultaneously
 and effectively.
 
@@ -377,20 +377,20 @@ and effectively.
 
 \subsection{Posterior samples}
 
-We show the posterior samples of both g and $\alpha$ ,for both beta
+We show the posterior samples of both g and $\alpha$, for both beta
 function and step function model. 
 
 The probability distribution can be visualised by plotting points at each sample
 position. An example in the x, y plane is shown for the posterior distribution of
 $\vec{g}$ of 64 sky patches in Fig. .8 galaxy shape profiles in each patch is used as the data.
-The number density of samples is proportional to the probability density.The figure shows that the two parameters of $\vec{g}$
+The number density of samples is proportional to the probability density. The figure shows that the two parameters of $\vec{g}$
 do not have strong correlation,since the shape of smaples is close to a circle.
 We also shows the histogram of g1 in a single sky patch. Not surprisingly it is close to a Gaussian distribution.
 If the probability distribution of parameters are perfect Gaussian, the most probable estimates and uncertainty 
-is just the mean and standard deviation of the Gaussian distribution. However,in pratical,we find that the distribution 
-of reduced shear $\vec{g}$ will be getting closer to Gaussian,with larger number of galaxies used. When we have more than
-8 galaxies in each sky patch, we found it's eligible to make such an approximation that to use sample mean and standard 
-deviation as most probable estimates and uncertainty. We will justify this approximation with a bias test in the following
+is just the mean and standard deviation of the Gaussian distribution. However, in pratical, we find that the distribution 
+of reduced shear $\vec{g}$ will  get closer to Gaussia, with larger number of galaxies used. When the number of galaxies in 
+one patch is equal or more than 8, we found it's eligible to make such an approximation that to use sample mean and standard 
+deviation as the most probable estimates and uncertainty. We will justify this approximation with a bias test in the following
 sub section.
 
 \begin{figure}
@@ -406,8 +406,8 @@ estimator.}
 \end{figure}
 
 \subsection{Bias Test}
-In this section,we measured the levels of possible systemmatical
-bias of this Hierarchical inference method.In principle given the correct model and prior ,
+In this section, we measured the levels of possible systemmatical
+bias of this Hierarchical inference method. In principle given the correct model and prior,
 the hierchical Bayesian inference method would have no bias, if propagate the whole likelihood function.
 However, in practical, the bias may be introduced by the model we use for the intrinsic shape distribution,
 and the prior regularizer of the prefactor $\xi$ as well as the Gaussian approximation we did for the likelihood
@@ -419,28 +419,28 @@ true shear $g^{true}$
 \hat{g_{i}}-g_{i}^{true}=m_{i}g_{i}^{true}+c_{i}
 \end{equation}
 
-To isolate out the source of the bias in this section,we assume we have perfect measurement on galaxy shape.
-We will discuss more on the influence of measurement error section 4.4 .
+To isolate out the source of the bias in this section, we assume we have perfect measurement on galaxy shape.
+We will discuss more on the influence of measurement error section 3.4 .
 
-We calculated the value of $\hat{g}-g^{true}$ of 10,000 data. Each data set has 64 patches and 8$\times$64 galaxies,and
-the true P($\epsilon$) is Beta(2.8,2.8).The step function model is used with the prior prefator $\xi=3$.
+We calculated the value of $\hat{g}-g^{true}$ of 10,000 data. Each data set has 64 patches and 8$\times$64 galaxies, and
+the true P($\epsilon$) is Beta(2.8,2.8). The step function model is used with the prior prefator $\xi=3$.
 The input true values of $\vec{g}_{1}$ and $\vec{g}_{2}$ of the 64$\times$10,000 sky patches are generated randomly from a uniform distribution from -0.1 to 0.1 . 
 
 As described in the previous subsection we use the sample mean as the most probable $g_{i}$ and 
-the standard deviation as the uncertainty. A standard weighted minimum $\chi^{2}$ linear fit is performed to get the
+the standard deviation as the uncertainty. A weighted minimum $\chi^{2}$ linear fit is performed to get the
 most-likely value and uncertainty of m and c.
  
-Due to the limitation of galaxy number we are not able to get an exact value for m and c.However in our result 
+Due to the limitation of galaxy number we are not able to get an exact value for m and c. However in our result 
 both the most-like and uncertainty of m are around $10^{-3}$ and for c they are around $10^{-4}$ . Due to the
 relatively large uncertainty, it is only an rough estimate of bias level.
 \begin{figure}
 \includegraphics[scale=0.5]{fig/g1bias}
 
 \caption{The figure shows the estimated $g_{1}$ values minus the true (input)
-$g_{1}^{true}$ . The distribution range of $g_{1}^{true}$ is from
+$g_{1}^{true}$. The distribution range of $g_{1}^{true}$ is from
 -0.1 to 0.1. Originally there are 640,000 true $g_{1}$. We bin the
 plot for presentation purpose. The data point and error bars are the weighted
- average and  variance of $\delta g_{1}$ in each bin.The blue
+ average and  variance of $\delta g_{1}$ in each bin. The blue
 line is the result of weighted linear fit of the original 640,000 data points
 with sample standard deviation as error bar.}
 \end{figure}
@@ -471,7 +471,7 @@ However,due to the limitation of computational time we avoid to do this convolut
 as an estimator of $\epsilon_{\ell}$.
 The likelihood of true lensed ellipticity $p(\epsilon_{ob}|\epsilon_{\ell})$ we use in the simulation is a 2D
 Gaussian with mean equals $\epsilon_{\ell}$ and $\sigma$ equals 0.05 .
-The result of bias test and mean square error test is shown in...
+The result of bias test and mean square error test is shown in 
 
 
 
@@ -509,13 +509,13 @@ in step function model.
 
 \section{Discussion}
 
-\label{sec:XXX} In weak lensing survey,one way to obtain high S/N
-ratio is to stack large number of lensing signal together,and calculate
-the mean shear map of all these lensing systems.However simply to
+\label{sec:XXX} In weak lensing survey, one way to obtain high S/N
+ratio is to stack large number of lensing signal together, and calculate
+the mean shear map of all these lensing systems. However simply to
 stack all the lensing signals would not be the optimal way because
 of the amount of information we can obtain from each lensing system
 can be very different. The Bayesian inference approach we proposed
-allows a natural way to optimally include all the data.In stead of
+allows a natural way to optimally include all the data. Instead of
 stacking what we need to do is to propogate the likelihood of the
 shear map of each lensing system. The statistical property of all
 the lensing systems like the galaxy-mass ,shear-shar correlation function
@@ -535,17 +535,17 @@ the lensing systems like the galaxy-mass ,shear-shar correlation function
 
 In summary, we have presented a conceptually hierachical inference
 approach for weak lensing shear estimation, with carefully calculated 
-uncertainty estimates.This method is intrinsically cope with high noise
+uncertainty estimates. This method is intrinsically cope with high noise
 levels on the input data and naturally allows bad fit to be identified 
 from the residuals map. We also have proposed a flexible non-parametric model 
 for intrinsic shape distribution allows us to obtain the correct posterior 
-distributions, while avoiding making any unsupported assumptions.The Gibbs
+distributions, while avoiding making any unsupported assumptions. The Gibbs
 sampler allows us to sample the posterior distribution of shear in large number of
 sky patches simultaneously and efficiently.
 
 Several  model fitting  shape measurent methods have been proposed in recent years.
 Unlike the average method which merely request a point estimator of galaxy ellipcity,our 
-hierachical bayesian approach utilizes the whole likelihood of the galaxy ellipticity.
+hierachical bayesian approach utilizes the whole likelihood of the galaxy ellipticity in a Bayesian probability analysis framework.
 \begin{itemize}
 \item We ...
 \item The ...
