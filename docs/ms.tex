@@ -396,7 +396,7 @@ sub section.
 \includegraphics[scale=0.15]{fig/test10}
 
 \caption{The figure shows the posterior samples of reduced shear g
-in all the 64 patches . The two blues lines indicate the poisition of
+in all the 64 patches. The two blues lines indicate the poisition of
 true(input) $g_{1}$ and $g_{2}$. The Blue '+' shows the position
 of sample mean, while the red '+' shows the result of mean ellipticity
 estimator.}
@@ -420,7 +420,7 @@ To isolate out the source of the bias in this section, we assume we have perfect
 We will discuss more on the influence of measurement error section 3.4 .
 
 We calculated the value of $\hat{g}-g^{true}$ of 10,000 data. Each data set has 64 patches and 8$\times$64 galaxies, and
-the true P($\epsilon$) is Beta(2.8,2.8). The step function model is used with the prior prefator $\xi=3$.
+the true(input) P($\epsilon_{0}$) is Beta(2.8,2.8). The step function model is used with the prior prefator $\xi=3$.
 The input true values of $\vec{g}_{1}$ and $\vec{g}_{2}$ of the 64$\times$10,000 sky patches are generated randomly from a uniform distribution from -0.1 to 0.1 . 
 
 As described in the previous subsection we use the sample mean as the most probable $g_{i}$ and 
@@ -488,14 +488,14 @@ too large, the inferred P($\epsilon$) will be too smooth, and the
 data will be under-fitted. In principle one could infer $\xi$ form
 the data at hand, but in practice we find that we further more need some
 prior regularizer on $\xi$ to obtain correct inference. Therefore in this paper 
-we just tuned $\xi$ empirically .From various trials, We find
+we just tuned $\xi$ empirically. From various trials, We find
 that $\xi$ should be proportional to the mean data number density and can
 be approximated by the following empirical formula: 
 \begin{equation}
 \xi=N<\rho(|\epsilon|)>/256*\frac{Nbin}{10}
 \end{equation}
 Here $<\rho|\epsilon|>=\int\rho(|\epsilon|)^{2}d(|\epsilon|)$ corresponds
-to the average of data number density,and Nbin is the number of bins used 
+to the average of data number density, and Nbin is the number of bins used 
 in step function model. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
