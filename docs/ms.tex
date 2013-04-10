@@ -323,8 +323,8 @@ we assume P($\epsilon_{0}$) is isotropic.
 While making the posterior samples $p(\vec{g},\alpha|Data)$ we choose to
 use the classical Gibbs sampler.
 
-In Gibbs sampling ,samples of variable $x_{j}$ is made from the conditional
-probability distribution:$p(x_{j}^{(i)}|x_{1}^{(i)},....,x_{j-1}^{(i)},x_{j+1}^{(i-1)}...,x_{n}^{(i-1)})$
+In Gibbs sampling, samples of variable $x_{j}$ is made from the conditional
+probability distribution: $p(x_{j}^{(i)}|x_{1}^{(i)},....,x_{j-1}^{(i)},x_{j+1}^{(i-1)}...,x_{n}^{(i-1)})$
 
 The conditional probability distribution of one variable given all the other variables are proportional to their joint probability distribution
 
@@ -335,13 +335,11 @@ p(x_{j}|x_{1},....,x_{j-1},x_{j+1}...,x_{n})\propto p(x_{1},.....,x_{n})
 
 One thing to note is that the conditional probability of g in ith
 patch only explicitly depends on $\alpha$, but not g in other patches. Therefore
-with $\alpha$ fixed, the posterior distribution of reduced shear
-in ith patch are independent from each other. 
+with $\alpha$ fixed, the posterior distributions of reduced shear in different patches are independent from each other. 
 \begin{equation}
 p(\vec{g}_{1}....\vec{g}_{n}|\alpha,Data)=p(\vec{g}_{1}|\alpha,Data_{1})....p(\vec{g}_{n}|\alpha,Data_{n})
 \end{equation}
-Therefore sampling reduced shear g from conditional distribution can
-be reduced to 2D sampling problem, which can be done very quickly.
+Therefore sampling reduced shear g from conditional distribution can be reduced to 2D sampling problem, which can be done very quickly.
 
 The total time needed to sample $g$ and $\alpha$ of 64 sky patches
 with 8 galaxies in each patch will only be approximitly 25s on a 2
@@ -354,7 +352,7 @@ The procedure of our simulation is that, first we generated N{*}NP
 unlensed galaxies' elliprticity from the ``true'' $P(\epsilon_{0})$, and
 asign these galaxies into NP patches equally. So each patch has N galaxies. Second
 we generate NP true reduced shears, and asign them to each patch, and
-then shear the unlensed galaxies using formula (4) .
+then shear the unlensed galaxies using formula (4).
 
 Finally we can put on some noise on $\epsilon_{\ell}$ to get the
 observed ellipticity $\epsilon_{ob}$. For simplicity we've only considered
@@ -388,9 +386,9 @@ do not have strong correlation,since the shape of smaples is close to a circle.
 We also shows the histogram of g1 in a single sky patch. Not surprisingly it is close to a Gaussian distribution.
 If the probability distribution of parameters are perfect Gaussian, the most probable estimates and uncertainty 
 is just the mean and standard deviation of the Gaussian distribution. However, in pratical, we find that the distribution 
-of reduced shear $\vec{g}$ will  get closer to Gaussia, with larger number of galaxies used. When the number of galaxies in 
+of reduced shear $\vec{g}$ will  get closer to Gaussian, when larger number of galaxies in one patch  is used. When the number of galaxies in 
 one patch is equal or more than 8, we found it's eligible to make such an approximation that to use sample mean and standard 
-deviation as the most probable estimates and uncertainty. We will justify this approximation with a bias test in the following
+deviation as the most probable estimates and uncertainty. We'll justify this approximation with a bias test in the following
 sub section.
 
 \begin{figure}
