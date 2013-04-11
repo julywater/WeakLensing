@@ -156,7 +156,7 @@ approach allows us to use the information maximumly without introducing
 in any wrong assumption on the intrinsic shape distribution.
 
 In galaxy--galaxy lensing, since the distortion is so weak, what people
-usually do is to stack many lensing signals together. Then they can obain the mean
+usually do is to stack many lensing signals together. Then they can obtain the mean
 shear map and infer the mean mass profile of single galaxy or galaxy
 cluster. However with the Hierarchical Bayesian method we can avoid this brute averaging
 of lensing signal. Instead, we can get the posterior distribution of mass profile for
@@ -233,7 +233,7 @@ p(\epsilon_{\ell}|\vec{g},\alpha)=p(\epsilon_{0}(\vec{g})|\alpha)\,|\frac{\parti
 
 Note that both $\epsilon_{0}$ and $\epsilon_{\ell}$ are complex numbers. So
 $|\frac{\partial\epsilon_{0}}{\partial\epsilon_{\ell}}|$ is the Jacobian
-determinant term,which can be calculated numerically from formula
+determinant term, which is calculated numerically from formula
 (5).
 
 If there is measurement error on $\epsilon_{ob}$, we will have 
@@ -246,19 +246,16 @@ and $p(\vec{g})=0$ if $|\vec{g}|>1$.
 
 The prior of $\alpha$ some how depends on the model we choose for
 intrinsic ellipticity distribution. When we use the step function
-model for P($\epsilon_{0}$), which we'll describe latter. We find that
-we need to use a prior on $\alpha$. 
+model for P($\epsilon_{0}$), which we'll describe latter, we find that
+we need to use a prior regulazier on $\alpha$. 
 \begin{equation}
 p(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
 \end{equation}
 
-
-Given the likehood functions and priors we can also calculated the
-marginalized likelihood function. 
+Given the likehood functions and priors we can also calculated the marginalized likelihood function. 
 \begin{equation}
 p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\vec{\alpha})\,p(\vec{\alpha}|\vec{g})\,d\vec{\alpha}
 \end{equation}
-
 
 Since $p(\alpha)$ does not explicitly depends on $\vec{g}$. $p(\alpha|\vec{g})$ is
 just the prior distribution $p(\vec{\alpha}|\xi)$. Therefore, we have
@@ -266,11 +263,10 @@ marginalized likehood
 \begin{equation}
 p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\vec{\alpha})\, p(\vec{\alpha}|\xi)\,d\vec{\alpha}
 \end{equation}
-Given that marginalized likelihood function, in principle we could
-optimize it and gives out a max-likelihood estimator for $\vec{g}$
+Given that marginalized likelihood function, in principle we could optimize it and gives out a max-likelihood estimator for $\vec{g}$
 in different patches simultaneously.
 
-One thing to note is that the likelihood of g in patch i only depends
+One thing to note is that the likelihood of g in one patch only explicitly depends
 on the shape parameters but not dependent to shear in other patches. Therefore, the
 marginalized likelihood of shape parameters is :
 
@@ -307,16 +303,13 @@ The prior distribution we used on $\alpha$ is :
 p(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
 \end{equation}
 
-
 Here $\xi$ is a prefactor need to be tuned.
-
 Meanwhile, in order to show the correctness of our method, we also
 set up a simulation in which we know the true $P(|\epsilon_{0}||\alpha)$
 is a Beta distribution, and thus $\alpha$ is the 2-D parameter (p,q)
 of the Beta distribution. We will show the posterior samples using
 both of these two methods in next section. Note that for either model
 we assume P($\epsilon_{0}$) is isotropic.
-
 
 \subsection{Gibbs Sampler}
 
