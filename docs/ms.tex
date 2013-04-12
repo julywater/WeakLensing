@@ -325,11 +325,11 @@ p(x_{j}|x_{1},....,x_{j-1},x_{j+1}...,x_{n})\propto p(x_{1},.....,x_{n})
 
 
 One thing to note is that the conditional probability of g in one patch only explicitly depends on $\alpha$, but not g in other patches. Therefore
-with $\alpha$ fixed, the posterior distributions of reduced shear in different patches are independent from each other. 
+With $\alpha$ fixed, the posterior distributions of reduced shear in different patches are independent from each other. 
 \begin{equation}
 p(\vec{g}_{1}....\vec{g}_{n}|\alpha,Data)=p(\vec{g}_{1}|\alpha,Data_{1})....p(\vec{g}_{n}|\alpha,Data_{n})
 \end{equation}
-Therefore sampling reduced shear g from conditional distribution can be reduced to 2D sampling problem, which can be done very quickly.
+Therefore sampling reduced shear g from the conditional probability distribution can be reduced to a 2D sampling problem, which can be done very quickly.
 
 The total time needed to sample $g$ and $\alpha$ of 64 sky patches with 8 galaxies in each patch will only be 
 approximitly 25s on a 2 GHz CPU.
@@ -343,7 +343,7 @@ asign these galaxies into NP patches equally. So each patch has N galaxies. Seco
 we generate NP true reduced shears, and asign them to each patch, and
 then shear the unlensed galaxies using formula (4).
 
-Finally we can put on some noise on $\epsilon_{\ell}$ to get the
+Finally we can add noise on $\epsilon_{\ell}$ to get the
 observed ellipticity $\epsilon_{ob}$. For simplicity we've only considered
 the situation when P($\epsilon_{ob}|\epsilon_{\ell})$ is a 2D Gaussian.
 
