@@ -250,12 +250,12 @@ we need to use a prior regulazier on $\alpha$.
 p(\vec{\alpha}|\xi)=exp(-\xi\sum(\alpha_{i}-\alpha_{i-1})^{2})
 \end{equation}
 
-Given the likehood functions and priors we can also calculated the marginalized likelihood function. 
+Given the likehood functions and priors we can also calculate the marginalized likelihood function. 
 \begin{equation}
 p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\vec{\alpha})\,p(\vec{\alpha}|\vec{g})\,d\vec{\alpha}
 \end{equation}
 
-Since $p(\alpha)$ does not explicitly depends on $\vec{g}$. $p(\alpha|\vec{g})$ is
+Since $p(\alpha)$ does not explicitly depend on $\vec{g}$. $p(\alpha|\vec{g})$ is
 just the prior distribution $p(\vec{\alpha}|\xi)$. Therefore, we have
 marginalized likehood 
 \begin{equation}
