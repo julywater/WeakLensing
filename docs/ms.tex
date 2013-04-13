@@ -369,7 +369,7 @@ function and step function model.
 
 The probability distribution can be visualised by plotting points at each sample
 position. An example in the x, y plane is shown for the posterior distribution of
-$\vec{g}$ of 64 sky patches in Fig. .8 galaxy shape profiles in each patch is used as the data.
+$\vec{g}$ of 64 sky patches in Fig 1. There are 8 galaxies in each patch in the simulation.
 The number density of samples is proportional to the probability density. The figure shows that the two parameters of $\vec{g}$
 do not have strong correlation, since the shape of smaples is close to a circle.
 We also shows the histogram of g1 in a single sky patch. Not surprisingly it is close to a Gaussian distribution.
@@ -378,7 +378,7 @@ is just the mean and standard deviation of the Gaussian distribution. However, i
 of reduced shear $\vec{g}$ will  get closer to Gaussian, when larger number of galaxies in one patch  is used. When the number of galaxies in 
 one patch is equal to or larger than 8, we found it's eligible to make such an approximation that to use sample mean and standard 
 deviation as the most probable estimates and uncertainty. We'll justify this approximation with a bias test in the following
-sub section.
+sub section. We also show a histgram of g1 in a random patch in fig 2.
 
 \begin{figure}
 \end{figure}
@@ -390,6 +390,15 @@ in all the 64 patches. The two blues lines indicate the poisition of
 true(input) $g_{1}$ and $g_{2}$. The Blue '+' shows the position
 of sample mean, while the red '+' shows the result of mean ellipticity
 estimator.}
+\end{figure}
+
+\begin{figure}
+\end{figure}
+
+\begin{figure}
+\includegraphics[scale=0.48]{fig/g1hist}
+
+\caption{The figure shows the histogram of posterior samples of g1 in a random patch. The vertical line denotes the value of true(input) g1. }
 \end{figure}
 
 \subsection{Bias Test}
