@@ -261,7 +261,7 @@ marginalized likehood
 \begin{equation}
 p(\epsilon_{\ell}|\vec{g})=\int p(\epsilon_{\ell}|\vec{g},\vec{\alpha})\, p(\vec{\alpha}|\xi)\,d\vec{\alpha}
 \end{equation}
-Given that marginalized likelihood function, in principle we could optimize it and gives out a max-likelihood estimator for $\vec{g}$
+Given that marginalized likelihood function, in principle we could optimize it and give out a max-likelihood estimator for $g$
 in different patches simultaneously.
 
 One thing to note is that the likelihood of $g$ in one patch only explicitly depends
@@ -282,16 +282,16 @@ will in turn have better estimates on the reduced shear $g$.
 
 \subsection{Model for Intrinsic Shape Distribution}
 
-The correctness of posterior distribution of g depends on the intrinsic
+The correctness of posterior distribution of $g$ depends on the intrinsic
 ellipticity distribution P($\epsilon_{0}|\alpha$). Due to the limitation
 of human's knowledge we will not be able to give an analytical form for
-$P(\epsilon_{0}|\alpha)$. Therefore we proposed an exceedingly flexible
-model for $P(\epsilon_{0}|\alpha)$, which does not requires further
+$P(\epsilon_{0}|\alpha)$. Therefore we propose an exceedingly flexible
+model for $P(\epsilon_{0}|\alpha)$, which does not require further
 assumption on $P(\epsilon_{0}|\alpha)$.
 
 We divide the 2-D space r $\in$(0,1) into N bins. The probability
 of each bin is $p_{i}=e^{\alpha_{i}}$. $\overrightarrow{\alpha}$
-is a N dimension parameter to be infered, simultaneously with $g$.
+is a N dimension parameter to be inferred, simultaneously with $g$.
 
 From practice we find that a prior smooth regularizer on $\vec{\alpha}$
 is needed to obtain a good estimation on $g$ and $\vec{\alpha}$.
@@ -324,7 +324,7 @@ p(x_{j}|x_{1},....,x_{j-1},x_{j+1}...,x_{n})\propto p(x_{1},.....,x_{n})
 \end{equation}
 
 
-One thing to note is that the conditional probability of g in one patch only explicitly depends on $\alpha$, but not g in other patches. Therefore
+One thing to note is that the conditional probability of $g$ in one patch only explicitly depends on $\alpha$, but not g in other patches. Therefore
 with $\vec{\alpha}$ fixed, the posterior distributions of reduced shear in different patches are independent from each other. 
 \begin{equation}
 p(\vec{g}_{1}....\vec{g}_{n}|\vec{\alpha},Data)=p(\vec{g}_{1}|\vec{\alpha},Data_{1})....p(\vec{g}_{n}|\vec{\alpha},Data_{n})
@@ -332,7 +332,7 @@ p(\vec{g}_{1}....\vec{g}_{n}|\vec{\alpha},Data)=p(\vec{g}_{1}|\vec{\alpha},Data_
 Therefore sampling reduced shear g from the conditional probability distribution can be reduced to a 2D sampling problem, which can be done very quickly.
 In the Gibbs sampler, first we make a sample of $p(\vec{\alpha}|\vec{g},Data)$ with Metropolis-Hasting sampler. The we make samples of $g$ in different patches
 independently according to formula (14).
-The total time needed to sample $g$ and $\alpha$ of 64 sky patches with 8 galaxies in each patch will only be 
+The total time needed to sample $g$ and $\alpha$ of 64 sky patches with 8 galaxies in each patch is 
 approximitly 25s on a 2 GHz CPU.
 
 
@@ -370,7 +370,7 @@ function and step function model.
 
 The probability distribution can be visualised by plotting points at each sample
 position. An example in the x, y plane is shown for the posterior distribution of
-$\vec{g}$ of 64 sky patches in Figure 1. There are 8 galaxies in each patch in the simulation.
+$g$ in 64 sky patches in Figure 1. There are 8 galaxies in each patch in the simulation.
 The number density of samples is proportional to the probability density. The figure shows that the two parameters of $\vec{g}$
 do not have strong correlation, since the shape of smaples is close to a circle.
 We also shows the histogram of g1 in a single sky patch in Figure 2. Not surprisingly it is close to a Gaussian distribution.
@@ -446,7 +446,7 @@ estimator has following expression :
 \end{equation}
 When the unlensd ellipticity is isotropic ,we have $<\epsilon_{\ell}>=g^{t}$ . In this case, the mean ellipticity estimator is 
 unbiased.
-Meanwhile we find that simply using the posterior mean as the estimator of g will lead to a significant bias. 
+Meanwhile we find that simply using the posterior mean as the estimator of $g$ will lead to a significant bias. 
 Figure 3 shows the result of bias test for both mean ellipticity and posterior mean estimator.
 
 \begin{figure}
@@ -483,7 +483,7 @@ lowwer panel shows the same thing with 16 galaxies in each patch. The green line
 
 \subsection{Measurement Error}
 In this section we  discuss how the shape measurement error 
-affect the variance and bias of this Hierarchical Bayesian method.
+affects the variance and bias shear inference.
 In principle, if the likelihood of true lensed ellipticity $p(\epsilon_{ob}|\epsilon_{\ell})$
 is known the likelihood $p(\epsilon_{ob}|g,\alpha)$ can be calculated using the convolution as equation ().
 However, due to the limitation of computational time we avoid to do this convolution but use $\epsilon_{ob}$
