@@ -328,12 +328,12 @@ p(x_{j}|x_{1},....,x_{j-1},x_{j+1}...,x_{n})\propto p(x_{1},.....,x_{n})
 One thing to note is that the conditional probability of $g$ in one patch only explicitly depends on $\alpha$, but not g in other patches. Therefore
 with $\vec{\alpha}$ fixed, the posterior distributions of reduced shear in different patches are independent from each other. 
 \begin{equation}
-p(\vec{g}_{1}....\vec{g}_{n}|\vec{\alpha},Data)=p(\vec{g}_{1}|\vec{\alpha},Data_{1})....p(\vec{g}_{n}|\vec{\alpha},Data_{n})
+p(g_{1}....g_{n}|\vec{\alpha},Data)=p(g_{1}|\vec{\alpha},Data_{1})....p(g_{n}|\vec{\alpha},Data_{n})
 \end{equation}
-Therefore sampling reduced shear g from the conditional probability distribution can be reduced to a 2D sampling problem, which can be done very quickly.
+Therefore sampling reduced shear $g$ from the conditional probability distribution can be reduced to a 2D sampling problem, which can be done very quickly.
 In the Gibbs sampler, first we make a sample of $p(\vec{\alpha}|\vec{g},Data)$ with Metropolis-Hasting sampler. The we make samples of $g$ in different patches
 independently according to formula (14).
-The total time needed to sample $g$ and $\alpha$ of 64 sky patches with 8 galaxies in each patch is 
+The total time needed to sample $g$ and $\vec{\alpha}$ of 64 sky patches with 8 galaxies in each patch is 
 approximitly 25s on a 2 GHz CPU.
 
 
