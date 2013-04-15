@@ -370,7 +370,7 @@ position. An example in the x, y plane is shown for the posterior distribution o
 $g$ in 64 sky patches in Figure 1. There are 8 galaxies in each patch in the simulation.
 The number density of samples is proportional to the probability density. The figure shows that the two parameters of $\vec{g}$
 do not have strong correlation, since the shape of smaples is close to a circle.
-We also shows the histogram of g1 in a single sky patch in Figure 2. Not surprisingly it is close to a Gaussian distribution.
+We also shows the histogram of g1 in a single sky patch in Figure 3. Not surprisingly it is close to a Gaussian distribution.
 If the probability distribution of parameters are perfect Gaussian, the most probable estimates and uncertainty 
 is just the mean and standard deviation of the Gaussian distribution. However, in pratical, we find that the distribution 
 of reduced shear $\vec{g}$ will  get closer to Gaussian, when larger number of galaxies in one patch  is used. When the number of galaxies in 
@@ -388,6 +388,15 @@ in all the 64 patches. The two blues lines indicate the poisition of
 true(input) $g_{1}$ and $g_{2}$. The Blue '+' shows the position
 of sample mean, while the red '+' shows the result of mean ellipticity
 estimator.}
+\end{figure}
+
+\begin{figure}
+\end{figure}
+\begin{figure}
+\includegraphics[scale=0.3]{fig/alpha_beta}
+\includegraphics[scale=0.3]{fig/stp10}
+
+\caption{The upper panel show the MCMC samples of shape parameters of the Beta function model. The true(input) value is (2.8,2.8) as indicated by the two straight lines in the graphic. The lower panel shows the sample mean of the shape parameters of the step function model. The curve denotes the true shape distribution $P(|\epsilon_{0}|)$, which is Beta (2.8,2.8) in this case.}
 \end{figure}
 
 \begin{figure}
@@ -420,9 +429,9 @@ The input true values of $\vec{g}_{1}$ and $\vec{g}_{2}$ of the 64$\times$10,000
 
 As described in section 3.1, we use the mean of posterior samples as the most probable $g_{i}$ and 
 the standard deviation as uncertainty. A weighted minimum $\chi^{2}$ linear fit is performed to get the
-most-likely value and uncertainty of m and c. for $g_{1}$ component we get $m=-6.09\times10^{-4}\pm2.39\times10^{-3}$
+most-likely value and uncertainty of m and c. For $g_{1}$ component we get $m=-6.09\times10^{-4}\pm2.39\times10^{-3}$
 and $c=(1.82\pm1.44)\times10^{-4}$, while for $g_{2}$ component
-we have $m=-3.48\times10^{-4}\pm2.14\times10^{-3}$ and $c=(2.01\pm1.29)\times10^{-4}$.
+we have $m=-3.48\times10^{-4}\pm2.14\times10^{-3}$ and $c=(2.01\pm1.29)\times10^{-4}$. Figure 3 shows the result of bais test for the $g_{1}$ component.
 Due to the limitation of galaxy number we are not able to get an exact value for m and c. However in our result 
 both the most-like and uncertainty of m are around $10^{-3}$ and for c they are around $10^{-4}$ . Due to the
 relatively large uncertainty, it is only an rough estimate of bias level.
@@ -445,7 +454,7 @@ estimator has following expression :
 When the unlensd ellipticity is isotropic ,we have $<\epsilon_{\ell}>=g^{t}$ . In this case, the mean ellipticity estimator is 
 unbiased.
 Meanwhile we find that simply using the posterior mean as the estimator of $g$ will lead to a significant bias. 
-Figure 3 shows the result of bias test for both mean ellipticity and posterior mean estimator.
+Figure 5 shows the result of bias test for both mean ellipticity and posterior mean estimator.
 
 \begin{figure}
 
@@ -465,7 +474,7 @@ bin.}
 \subsection{Accuracy Test}
 
 In this section we calculate the mean square error of mean of posterior samples from the true(input) $g$.  We show that the mean of posterior samples has smaller mean square error than the mean ellipticity estimator but has higher mean square error than the direct Bayesian estimates which could be made if we knew the exact intrinsic shape distribution.
-In figure 5 we show how the mean square error changes with the number of galaxies and patches, and make a comparison with mean ellipticity estimator and direct Bayesian estimates. From the figure we can see that when the number of sky patches is small our hierarchical Bayesian method does not necessarily has lower mean square error than mean ellipticity estimator. However it becomes smaller and approach to the result of direct Bayesian estimate which is the best estimate we can possibly make.
+In figure 6 we show how the mean square error changes with the number of galaxies and patches, and make a comparison with mean ellipticity estimator and direct Bayesian estimates. From the figure we can see that when the number of sky patches is small our hierarchical Bayesian method does not necessarily has lower mean square error than mean ellipticity estimator. However it becomes smaller and approach to the result of direct Bayesian estimate which is the best estimate we can possibly make.
 
 
 \begin{figure}
@@ -488,7 +497,7 @@ However, due to the limitation of computational time we avoid to do this convolu
 as an estimator of $\epsilon_{\ell}$.
 The likelihood of true lensed ellipticity $p(\epsilon_{ob}|\epsilon_{\ell})$ we use in the simulation is a 2D
 Gaussian with mean equals $\epsilon_{\ell}$ and $\sigma$ equals 0.05 .
-Figure 5 shows the mean square error of the sample mean estimates in comparison with mean ellipticity estimator.
+Figure 7 shows the mean square error of the sample mean estimates in comparison with mean ellipticity estimator.
 \begin{figure}
 \includegraphics[scale=0.48]{fig/errorN8}
 \caption{Figure 5 shows how the mean square error of sample mean estimate varies with the number of patches used, while shape measurement error is considered as described in Section 3.4 .
